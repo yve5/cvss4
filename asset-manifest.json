@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/cvss4/static/js/main.8717cff5.js",
+    "static/js/787.377c6bc8.chunk.js": "/cvss4/static/js/787.377c6bc8.chunk.js",
+    "index.html": "/cvss4/index.html",
+    "main.8717cff5.js.map": "/cvss4/static/js/main.8717cff5.js.map",
+    "787.377c6bc8.chunk.js.map": "/cvss4/static/js/787.377c6bc8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.8717cff5.js"
+  ]
+}
