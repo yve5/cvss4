@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# CVSS v4 Calculator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Pitch
+
+This project proposes a CVSS v4.0 calculator with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Scripts
 
@@ -11,3 +13,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 | `npm run coverage` | Launches the test runner in order to generate a project full coverage report. |
 | `npm run build`    | Builds the app for production to the `build` folder.                          |
 | `npm run deploy`   | Deploy the `build` folder content in Github project page.                     |
+
+## Source
+
+[Original CVSS v4.0 calculator](https://github.com/RedHatProductSecurity/cvss-v4-calculator/tree/main).
