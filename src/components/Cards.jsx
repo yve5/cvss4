@@ -1,7 +1,5 @@
 import React from 'react';
-import { cvssConfig } from '../resources/cvssConfig';
-
-// console.log(Object.entries(cvssConfig));
+import { cvssConfig } from '../references/cvssConfig';
 
 const Cards = () =>
   Object.entries(cvssConfig).map(
