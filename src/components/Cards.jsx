@@ -30,7 +30,7 @@ const Cards = ({
               <div className="row my-2" key={metricType + metricGroup + metric}>
                 <div className="col-md-3">
                   <p
-                    className="card-text text-end mt-1"
+                    className="card-text text-md-end mt-1"
                     title={metricData?.tooltip}
                   >
                     {metric} <sup>?</sup>
@@ -43,7 +43,7 @@ const Cards = ({
                       ([option, optionsData]) => (
                         <div
                           key={metricType + metricGroup + metric + option}
-                          className="col-md-2 d-grid"
+                          className="col-md-6 col-lg-2 d-grid mb-2"
                         >
                           <button
                             title={optionsData?.tooltip}
