@@ -1,26 +1,30 @@
-// import {
-//   SATISFACTION_CHANGE_VALUE,
-//   SATISFACTION_QUESTIONS,
-// } from '../resources/constants';
-
-// const data = {};
-// SATISFACTION_QUESTIONS.forEach(({ id }) => (data[id] = 0));
+import { CVSS4_CHANGE_VALUE } from '../resources/constants';
+import { cvssConfig } from '../references/cvssConfig';
+import { initMetrics } from '../utils';
 
 const initialState = {
-  // data,
+  metrics: initMetrics(cvssConfig),
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    // case SATISFACTION_CHANGE_VALUE:
-    //   return {
-    //     ...state,
-    //     ...action,
-    //     data: {
-    //       ...state.data,
-    //       ...action.data,
-    //     },
-    //   };
+    case CVSS4_CHANGE_VALUE: {
+      const updatedMetric = {};
+      updatedMetric[action.metric] = action.value;
+
+      const copyAction = { ...action };
+      delete copyAction.metric;
+      delete copyAction.value;
+
+      return {
+        ...state,
+        ...copyAction,
+        metrics: {
+          ...state.metrics,
+          ...updatedMetric,
+        },
+      };
+    }
 
     default:
       return state;

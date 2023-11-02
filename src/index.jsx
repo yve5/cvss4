@@ -8,6 +8,8 @@ import store from './resources/store';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App context={ReactReduxContext} />
+    </Provider>
   </React.StrictMode>
 );

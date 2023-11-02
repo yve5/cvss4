@@ -1,13 +1,6 @@
 import { createStore, combineReducers } from 'redux';
+import cvss4 from '../reducer/Reducer';
 
-// import i18n from '../features/i18n/reducer/Reducer';
-// import satisfaction from '../features/satisfaction/reducer/Reducer';
-
-const store = createStore(
-  combineReducers({
-    // i18n,
-    // satisfaction,
-  })
-);
+const store = createStore(combineReducers({ cvss4 }));
 
 export default store;

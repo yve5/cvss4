@@ -1,7 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import * as All from '../actions/All';
+import { getClassNames } from '../utils';
 import { cvssConfig } from '../references/cvssConfig';
 
-const Cards = () =>
+const Cards = ({
+  root: {
+    cvss4: { metrics },
+  },
+  changeValue,
+}) =>
   Object.entries(cvssConfig).map(
     ([metricType, { fill, metric_groups: metricGroups }]) => (
       <div className="card my-3" key={metricType}>
@@ -37,8 +46,15 @@ const Cards = () =>
                           className="col-md-2 d-grid"
                         >
                           <button
-                            className="btn btn-outline-success btn-block"
                             title={optionsData?.tooltip}
+                            className={getClassNames(
+                              metrics,
+                              metricData?.short,
+                              optionsData?.value
+                            )}
+                            onClick={() =>
+                              changeValue(metricData?.short, optionsData?.value)
+                            }
                             type="button"
                           >
                             {option}
@@ -56,4 +72,12 @@ const Cards = () =>
     )
   );
 
-export default Cards;
+const mapStateToProps = (state) => ({
+  root: state,
+});
+
+const mapDispatchToProps = {
+  ...All,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cards);
