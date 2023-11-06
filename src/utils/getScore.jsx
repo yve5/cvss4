@@ -1,45 +1,47 @@
 import { getMetric } from './getMetric';
 import { getMacroVector } from './getMacroVector';
+import { getEQMaxes } from './getEQMaxes';
+import { extractValueMetric } from './extractValueMetric';
+import { cvssLookupGlobal as lookup } from '../references/cvssLookup';
+import { maxSeverity } from '../references/maxSeverity';
 
 export const getScore = (metrics) => {
-  // const get = (metric) => getMetric(metrics, metric);
+  const get = (metric) => getMetric(metrics, metric);
 
   // The following defines the index of each metric's values.
   // It is used when looking for the highest vector part of the
   // combinations produced by the MacroVector respective highest vectors.
   const AVLevels = { N: 0.0, A: 0.1, L: 0.2, P: 0.3 };
-  // const PRLevels = { N: 0.0, L: 0.1, H: 0.2 };
-  // const UILevels = { N: 0.0, P: 0.1, A: 0.2 };
+  const PRLevels = { N: 0.0, L: 0.1, H: 0.2 };
+  const UILevels = { N: 0.0, P: 0.1, A: 0.2 };
 
-  // const ACLevels = { L: 0.0, H: 0.1 };
-  // const ATLevels = { N: 0.0, P: 0.1 };
+  const ACLevels = { L: 0.0, H: 0.1 };
+  const ATLevels = { N: 0.0, P: 0.1 };
 
-  // const VCLevels = { H: 0.0, L: 0.1, N: 0.2 };
-  // const VILevels = { H: 0.0, L: 0.1, N: 0.2 };
-  // const VALevels = { H: 0.0, L: 0.1, N: 0.2 };
+  const VCLevels = { H: 0.0, L: 0.1, N: 0.2 };
+  const VILevels = { H: 0.0, L: 0.1, N: 0.2 };
+  const VALevels = { H: 0.0, L: 0.1, N: 0.2 };
 
-  // const SCLevels = { H: 0.1, L: 0.2, N: 0.3 };
-  // const SILevels = { S: 0.0, H: 0.1, L: 0.2, N: 0.3 };
-  // const SALevels = { S: 0.0, H: 0.1, L: 0.2, N: 0.3 };
+  const SCLevels = { H: 0.1, L: 0.2, N: 0.3 };
+  const SILevels = { S: 0.0, H: 0.1, L: 0.2, N: 0.3 };
+  const SALevels = { S: 0.0, H: 0.1, L: 0.2, N: 0.3 };
 
-  // const CRLevels = { H: 0.0, M: 0.1, L: 0.2 };
-  // const IRLevels = { H: 0.0, M: 0.1, L: 0.2 };
-  // const ARLevels = { H: 0.0, M: 0.1, L: 0.2 };
+  const CRLevels = { H: 0.0, M: 0.1, L: 0.2 };
+  const IRLevels = { H: 0.0, M: 0.1, L: 0.2 };
+  const ARLevels = { H: 0.0, M: 0.1, L: 0.2 };
 
   // const ELevels = { U: 0.2, P: 0.1, A: 0 };
 
   const macroVector = getMacroVector(metrics);
 
-  console.log(macroVector);
+  // Exception for no impact on system (shortcut)
+  if (
+    ['VC', 'VI', 'VA', 'SC', 'SI', 'SA'].every((metric) => get(metric) === 'N')
+  ) {
+    return 0.0;
+  }
 
-  // // Exception for no impact on system (shortcut)
-  // if (
-  //   ['VC', 'VI', 'VA', 'SC', 'SI', 'SA'].every((metric) => getM(metric) === 'N')
-  // ) {
-  //   return 0.0;
-  // }
-
-  // value = this.lookup[macroVector];
+  const value = lookup[macroVector];
 
   // 1. For each of the EQs:
   //   a. The maximal scoring difference is determined as the difference
@@ -47,353 +49,358 @@ export const getScore = (metrics) => {
   //     i. If there is no lower MacroVector the available distance is
   //        set to NaN and then ignored in the further calculations.
 
-  // eq1_val = parseInt(macroVector[0]);
-  // eq2_val = parseInt(macroVector[1]);
-  // eq3_val = parseInt(macroVector[2]);
-  // eq4_val = parseInt(macroVector[3]);
-  // eq5_val = parseInt(macroVector[4]);
-  // eq6_val = parseInt(macroVector[5]);
+  const eq1Val = parseInt(macroVector[0]);
+  const eq2Val = parseInt(macroVector[1]);
+  const eq3Val = parseInt(macroVector[2]);
+  const eq4Val = parseInt(macroVector[3]);
+  const eq5Val = parseInt(macroVector[4]);
+  const eq6Val = parseInt(macroVector[5]);
 
-  // // compute next lower macro, it can also not exist
-  // eq1_next_lower_macro = ''.concat(
-  //   eq1_val + 1,
-  //   eq2_val,
-  //   eq3_val,
-  //   eq4_val,
-  //   eq5_val,
-  //   eq6_val
-  // );
-  // eq2_next_lower_macro = ''.concat(
-  //   eq1_val,
-  //   eq2_val + 1,
-  //   eq3_val,
-  //   eq4_val,
-  //   eq5_val,
-  //   eq6_val
-  // );
+  // compute next lower macro, it can also not exist
+  const eq1NextLowerMacro = ''.concat(
+    eq1Val + 1,
+    eq2Val,
+    eq3Val,
+    eq4Val,
+    eq5Val,
+    eq6Val
+  );
 
-  // // eq3 and eq6 are related
-  // if (eq3 == 1 && eq6 == 1) {
-  //   // 11 --> 21
-  //   eq3eq6_next_lower_macro = ''.concat(
-  //     eq1_val,
-  //     eq2_val,
-  //     eq3_val + 1,
-  //     eq4_val,
-  //     eq5_val,
-  //     eq6_val
-  //   );
-  // } else if (eq3 == 0 && eq6 == 1) {
-  //   // 01 --> 11
-  //   eq3eq6_next_lower_macro = ''.concat(
-  //     eq1_val,
-  //     eq2_val,
-  //     eq3_val + 1,
-  //     eq4_val,
-  //     eq5_val,
-  //     eq6_val
-  //   );
-  // } else if (eq3 == 1 && eq6 == 0) {
-  //   // 10 --> 11
-  //   eq3eq6_next_lower_macro = ''.concat(
-  //     eq1_val,
-  //     eq2_val,
-  //     eq3_val,
-  //     eq4_val,
-  //     eq5_val,
-  //     eq6_val + 1
-  //   );
-  // } else if (eq3 == 0 && eq6 == 0) {
-  //   // 00 --> 01
-  //   // 00 --> 10
-  //   eq3eq6_next_lower_macro_left = ''.concat(
-  //     eq1_val,
-  //     eq2_val,
-  //     eq3_val,
-  //     eq4_val,
-  //     eq5_val,
-  //     eq6_val + 1
-  //   );
-  //   eq3eq6_next_lower_macro_right = ''.concat(
-  //     eq1_val,
-  //     eq2_val,
-  //     eq3_val + 1,
-  //     eq4_val,
-  //     eq5_val,
-  //     eq6_val
-  //   );
-  // } else {
-  //   // 21 --> 32 (do not exist)
-  //   eq3eq6_next_lower_macro = ''.concat(
-  //     eq1_val,
-  //     eq2_val,
-  //     eq3_val + 1,
-  //     eq4_val,
-  //     eq5_val,
-  //     eq6_val + 1
-  //   );
-  // }
+  const eq2NextLowerMacro = ''.concat(
+    eq1Val,
+    eq2Val + 1,
+    eq3Val,
+    eq4Val,
+    eq5Val,
+    eq6Val
+  );
 
-  // eq4_next_lower_macro = ''.concat(
-  //   eq1_val,
-  //   eq2_val,
-  //   eq3_val,
-  //   eq4_val + 1,
-  //   eq5_val,
-  //   eq6_val
-  // );
-  // eq5_next_lower_macro = ''.concat(
-  //   eq1_val,
-  //   eq2_val,
-  //   eq3_val,
-  //   eq4_val,
-  //   eq5_val + 1,
-  //   eq6_val
-  // );
+  const eq3 = eq3Val;
+  const eq6 = eq6Val;
+  let eq3eq6NextLowerMacro;
+  let eq3eq6NextLowerMacroLeft;
+  let eq3eq6NextLowerMacroRight;
 
-  // // get their score, if the next lower macro score do not exist the result is NaN
-  // score_eq1_next_lower_macro = this.lookup[eq1_next_lower_macro];
-  // score_eq2_next_lower_macro = this.lookup[eq2_next_lower_macro];
+  // eq3 and eq6 are related
+  if (eq3 === 1 && eq6 === 1) {
+    // 11 --> 21
+    eq3eq6NextLowerMacro = ''.concat(
+      eq1Val,
+      eq2Val,
+      eq3Val + 1,
+      eq4Val,
+      eq5Val,
+      eq6Val
+    );
+  } else if (eq3 === 0 && eq6 === 1) {
+    // 01 --> 11
+    eq3eq6NextLowerMacro = ''.concat(
+      eq1Val,
+      eq2Val,
+      eq3Val + 1,
+      eq4Val,
+      eq5Val,
+      eq6Val
+    );
+  } else if (eq3 === 1 && eq6 === 0) {
+    // 10 --> 11
+    eq3eq6NextLowerMacro = ''.concat(
+      eq1Val,
+      eq2Val,
+      eq3Val,
+      eq4Val,
+      eq5Val,
+      eq6Val + 1
+    );
+  } else if (eq3 === 0 && eq6 === 0) {
+    // 00 --> 01
+    // 00 --> 10
+    eq3eq6NextLowerMacroLeft = ''.concat(
+      eq1Val,
+      eq2Val,
+      eq3Val,
+      eq4Val,
+      eq5Val,
+      eq6Val + 1
+    );
+    eq3eq6NextLowerMacroRight = ''.concat(
+      eq1Val,
+      eq2Val,
+      eq3Val + 1,
+      eq4Val,
+      eq5Val,
+      eq6Val
+    );
+  } else {
+    // 21 --> 32 (do not exist)
+    eq3eq6NextLowerMacro = ''.concat(
+      eq1Val,
+      eq2Val,
+      eq3Val + 1,
+      eq4Val,
+      eq5Val,
+      eq6Val + 1
+    );
+  }
 
-  // if (eq3 == 0 && eq6 == 0) {
-  //   // multiple path take the one with higher score
-  //   score_eq3eq6_next_lower_macro_left =
-  //     this.lookup[eq3eq6_next_lower_macro_left];
-  //   score_eq3eq6_next_lower_macro_right =
-  //     this.lookup[eq3eq6_next_lower_macro_right];
+  const eq4NextLowerMacro = ''.concat(
+    eq1Val,
+    eq2Val,
+    eq3Val,
+    eq4Val + 1,
+    eq5Val,
+    eq6Val
+  );
+  const eq5NextLowerMacro = ''.concat(
+    eq1Val,
+    eq2Val,
+    eq3Val,
+    eq4Val,
+    eq5Val + 1,
+    eq6Val
+  );
 
-  //   if (
-  //     score_eq3eq6_next_lower_macro_left >
-  //     score_eq3eq6_next_lower_macro_right
-  //   ) {
-  //     score_eq3eq6_next_lower_macro = score_eq3eq6_next_lower_macro_left;
-  //   } else {
-  //     score_eq3eq6_next_lower_macro = score_eq3eq6_next_lower_macro_right;
-  //   }
-  // } else {
-  //   score_eq3eq6_next_lower_macro = this.lookup[eq3eq6_next_lower_macro];
-  // }
+  // get their score, if the next lower macro score do not exist the result is NaN
+  const scoreEq1NextLowerMacro = lookup[eq1NextLowerMacro];
+  const scoreEq2NextLowerMacro = lookup[eq2NextLowerMacro];
+  let scoreEq3eq6NextLowerMacro;
 
-  // score_eq4_next_lower_macro = this.lookup[eq4_next_lower_macro];
-  // score_eq5_next_lower_macro = this.lookup[eq5_next_lower_macro];
+  if (eq3 === 0 && eq6 === 0) {
+    // multiple path take the one with higher score
+    const scoreEq3eq6NextLowerMacroLeft = lookup[eq3eq6NextLowerMacroLeft];
+    const scoreEq3eq6NextLowerMacroRight = lookup[eq3eq6NextLowerMacroRight];
 
-  // //   b. The severity distance of the to-be scored vector from a
-  // //      highest severity vector in the same MacroVector is determined.
-  // eq1_maxes = this.getEQMaxes(macroVector, 1);
-  // eq2_maxes = this.getEQMaxes(macroVector, 2);
-  // eq3_eq6_maxes = this.getEQMaxes(macroVector, 3)[macroVector[5]];
-  // eq4_maxes = this.getEQMaxes(macroVector, 4);
-  // eq5_maxes = this.getEQMaxes(macroVector, 5);
+    if (scoreEq3eq6NextLowerMacroLeft > scoreEq3eq6NextLowerMacroRight) {
+      scoreEq3eq6NextLowerMacro = scoreEq3eq6NextLowerMacroLeft;
+    } else {
+      scoreEq3eq6NextLowerMacro = scoreEq3eq6NextLowerMacroRight;
+    }
+  } else {
+    scoreEq3eq6NextLowerMacro = lookup[eq3eq6NextLowerMacro];
+  }
 
-  // // compose them
-  // max_vectors = [];
-  // for (eq1_max of eq1_maxes) {
-  //   for (eq2_max of eq2_maxes) {
-  //     for (eq3_eq6_max of eq3_eq6_maxes) {
-  //       for (eq4_max of eq4_maxes) {
-  //         for (eq5max of eq5_maxes) {
-  //           max_vectors.push(
-  //             eq1_max + eq2_max + eq3_eq6_max + eq4_max + eq5max
-  //           );
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  const scoreEq4NextLowerMacro = lookup[eq4NextLowerMacro];
+  const scoreEq5NextLowerMacro = lookup[eq5NextLowerMacro];
 
-  // // Find the max vector to use i.e. one in the combination of all the highests
-  // // that is greater or equal (severity distance) than the to-be scored vector.
-  // for (let i = 0; i < max_vectors.length; i++) {
-  //   max_vector = max_vectors[i];
-  //   severity_distance_AV =
-  //     AV_levels[this.m('AV')] -
-  //     AV_levels[this.extractValueMetric('AV', max_vector)];
-  //   severity_distance_PR =
-  //     PR_levels[this.m('PR')] -
-  //     PR_levels[this.extractValueMetric('PR', max_vector)];
-  //   severity_distance_UI =
-  //     UI_levels[this.m('UI')] -
-  //     UI_levels[this.extractValueMetric('UI', max_vector)];
+  //   b. The severity distance of the to-be scored vector from a
+  //      highest severity vector in the same MacroVector is determined.
+  const eq1Maxes = getEQMaxes(macroVector, 1);
+  const eq2Maxes = getEQMaxes(macroVector, 2);
+  const eq3Eq6Maxes = getEQMaxes(macroVector, 3)[macroVector[5]];
+  const eq4Maxes = getEQMaxes(macroVector, 4);
+  const eq5Maxes = getEQMaxes(macroVector, 5);
 
-  //   severity_distance_AC =
-  //     AC_levels[this.m('AC')] -
-  //     AC_levels[this.extractValueMetric('AC', max_vector)];
-  //   severity_distance_AT =
-  //     AT_levels[this.m('AT')] -
-  //     AT_levels[this.extractValueMetric('AT', max_vector)];
+  // compose them
+  const maxVectors = [];
 
-  //   severity_distance_VC =
-  //     VC_levels[this.m('VC')] -
-  //     VC_levels[this.extractValueMetric('VC', max_vector)];
-  //   severity_distance_VI =
-  //     VI_levels[this.m('VI')] -
-  //     VI_levels[this.extractValueMetric('VI', max_vector)];
-  //   severity_distance_VA =
-  //     VA_levels[this.m('VA')] -
-  //     VA_levels[this.extractValueMetric('VA', max_vector)];
+  eq1Maxes.forEach((eq1Max) => {
+    eq2Maxes.forEach((eq2Max) => {
+      eq3Eq6Maxes.forEach((eq3Eq6Max) => {
+        eq4Maxes.forEach((eq4Max) => {
+          eq5Maxes.forEach((eq5Max) => {
+            maxVectors.push(eq1Max + eq2Max + eq3Eq6Max + eq4Max + eq5Max);
+          });
+        });
+      });
+    });
+  });
 
-  //   severity_distance_SC =
-  //     SC_levels[this.m('SC')] -
-  //     SC_levels[this.extractValueMetric('SC', max_vector)];
-  //   severity_distance_SI =
-  //     SI_levels[this.m('SI')] -
-  //     SI_levels[this.extractValueMetric('SI', max_vector)];
-  //   severity_distance_SA =
-  //     SA_levels[this.m('SA')] -
-  //     SA_levels[this.extractValueMetric('SA', max_vector)];
+  // Find the max vector to use i.e. one in the combination of all the highests
+  // that is greater or equal (severity distance) than the to-be scored vector.
+  let continueLoop = true;
+  let i = 0;
 
-  //   severity_distance_CR =
-  //     CR_levels[this.m('CR')] -
-  //     CR_levels[this.extractValueMetric('CR', max_vector)];
-  //   severity_distance_IR =
-  //     IR_levels[this.m('IR')] -
-  //     IR_levels[this.extractValueMetric('IR', max_vector)];
-  //   severity_distance_AR =
-  //     AR_levels[this.m('AR')] -
-  //     AR_levels[this.extractValueMetric('AR', max_vector)];
+  let severityDistanceAV;
+  let severityDistancePR;
+  let severityDistanceUI;
 
-  //   // if any is less than zero this is not the right max
-  //   if (
-  //     [
-  //       severity_distance_AV,
-  //       severity_distance_PR,
-  //       severity_distance_UI,
-  //       severity_distance_AC,
-  //       severity_distance_AT,
-  //       severity_distance_VC,
-  //       severity_distance_VI,
-  //       severity_distance_VA,
-  //       severity_distance_SC,
-  //       severity_distance_SI,
-  //       severity_distance_SA,
-  //       severity_distance_CR,
-  //       severity_distance_IR,
-  //       severity_distance_AR,
-  //     ].some((met) => met < 0)
-  //   ) {
-  //     continue;
-  //   }
-  //   // if multiple maxes exist to reach it it is enough the first one
-  //   break;
-  // }
+  let severityDistanceAC;
+  let severityDistanceAT;
 
-  // current_severity_distance_eq1 =
-  //   severity_distance_AV + severity_distance_PR + severity_distance_UI;
-  // current_severity_distance_eq2 =
-  //   severity_distance_AC + severity_distance_AT;
-  // current_severity_distance_eq3eq6 =
-  //   severity_distance_VC +
-  //   severity_distance_VI +
-  //   severity_distance_VA +
-  //   severity_distance_CR +
-  //   severity_distance_IR +
-  //   severity_distance_AR;
-  // current_severity_distance_eq4 =
-  //   severity_distance_SC + severity_distance_SI + severity_distance_SA;
-  // current_severity_distance_eq5 = 0;
+  let severityDistanceVC;
+  let severityDistanceVI;
+  let severityDistanceVA;
 
-  // step = 0.1;
+  let severityDistanceSC;
+  let severityDistanceSI;
+  let severityDistanceSA;
 
-  // // if the next lower macro score do not exist the result is Nan
-  // // Rename to maximal scoring difference (aka MSD)
-  // available_distance_eq1 = value - score_eq1_next_lower_macro;
-  // available_distance_eq2 = value - score_eq2_next_lower_macro;
-  // available_distance_eq3eq6 = value - score_eq3eq6_next_lower_macro;
-  // available_distance_eq4 = value - score_eq4_next_lower_macro;
-  // available_distance_eq5 = value - score_eq5_next_lower_macro;
+  let severityDistanceCR;
+  let severityDistanceIR;
+  let severityDistanceAR;
 
-  // percent_to_next_eq1_severity = 0;
-  // percent_to_next_eq2_severity = 0;
-  // percent_to_next_eq3eq6_severity = 0;
-  // percent_to_next_eq4_severity = 0;
-  // percent_to_next_eq5_severity = 0;
+  while (i < maxVectors.length && continueLoop) {
+    const maxVector = maxVectors[i];
 
-  // // some of them do not exist, we will find them by retrieving the score. If score null then do not exist
-  // n_existing_lower = 0;
+    severityDistanceAV =
+      AVLevels[get('AV')] - AVLevels[extractValueMetric('AV', maxVector)];
+    severityDistancePR =
+      PRLevels[get('PR')] - PRLevels[extractValueMetric('PR', maxVector)];
+    severityDistanceUI =
+      UILevels[get('UI')] - UILevels[extractValueMetric('UI', maxVector)];
 
-  // normalized_severity_eq1 = 0;
-  // normalized_severity_eq2 = 0;
-  // normalized_severity_eq3eq6 = 0;
-  // normalized_severity_eq4 = 0;
-  // normalized_severity_eq5 = 0;
+    severityDistanceAC =
+      ACLevels[get('AC')] - ACLevels[extractValueMetric('AC', maxVector)];
+    severityDistanceAT =
+      ATLevels[get('AT')] - ATLevels[extractValueMetric('AT', maxVector)];
 
-  // // multiply by step because distance is pure
-  // maxSeverity_eq1 = this.maxSeverityData['eq1'][eq1_val] * step;
-  // maxSeverity_eq2 = this.maxSeverityData['eq2'][eq2_val] * step;
-  // maxSeverity_eq3eq6 =
-  //   this.maxSeverityData['eq3eq6'][eq3_val][eq6_val] * step;
-  // maxSeverity_eq4 = this.maxSeverityData['eq4'][eq4_val] * step;
+    severityDistanceVC =
+      VCLevels[get('VC')] - VCLevels[extractValueMetric('VC', maxVector)];
+    severityDistanceVI =
+      VILevels[get('VI')] - VILevels[extractValueMetric('VI', maxVector)];
+    severityDistanceVA =
+      VALevels[get('VA')] - VALevels[extractValueMetric('VA', maxVector)];
 
-  // //   c. The proportion of the distance is determined by dividing
-  // //      the severity distance of the to-be-scored vector by the depth
-  // //      of the MacroVector.
-  // //   d. The maximal scoring difference is multiplied by the proportion of
-  // //      distance.
-  // if (!isNaN(available_distance_eq1)) {
-  //   n_existing_lower = n_existing_lower + 1;
-  //   percent_to_next_eq1_severity =
-  //     current_severity_distance_eq1 / maxSeverity_eq1;
-  //   normalized_severity_eq1 =
-  //     available_distance_eq1 * percent_to_next_eq1_severity;
-  // }
+    severityDistanceSC =
+      SCLevels[get('SC')] - SCLevels[extractValueMetric('SC', maxVector)];
+    severityDistanceSI =
+      SILevels[get('SI')] - SILevels[extractValueMetric('SI', maxVector)];
+    severityDistanceSA =
+      SALevels[get('SA')] - SALevels[extractValueMetric('SA', maxVector)];
 
-  // if (!isNaN(available_distance_eq2)) {
-  //   n_existing_lower = n_existing_lower + 1;
-  //   percent_to_next_eq2_severity =
-  //     current_severity_distance_eq2 / maxSeverity_eq2;
-  //   normalized_severity_eq2 =
-  //     available_distance_eq2 * percent_to_next_eq2_severity;
-  // }
+    severityDistanceCR =
+      CRLevels[get('CR')] - CRLevels[extractValueMetric('CR', maxVector)];
+    severityDistanceIR =
+      IRLevels[get('IR')] - IRLevels[extractValueMetric('IR', maxVector)];
+    severityDistanceAR =
+      ARLevels[get('AR')] - ARLevels[extractValueMetric('AR', maxVector)];
 
-  // if (!isNaN(available_distance_eq3eq6)) {
-  //   n_existing_lower = n_existing_lower + 1;
-  //   percent_to_next_eq3eq6_severity =
-  //     current_severity_distance_eq3eq6 / maxSeverity_eq3eq6;
-  //   normalized_severity_eq3eq6 =
-  //     available_distance_eq3eq6 * percent_to_next_eq3eq6_severity;
-  // }
+    // if multiple maxes exist to reach it it is enough the first one
+    if (
+      ![
+        severityDistanceAV,
+        severityDistancePR,
+        severityDistanceUI,
+        severityDistanceAC,
+        severityDistanceAT,
+        severityDistanceVC,
+        severityDistanceVI,
+        severityDistanceVA,
+        severityDistanceSC,
+        severityDistanceSI,
+        severityDistanceSA,
+        severityDistanceCR,
+        severityDistanceIR,
+        severityDistanceAR,
+      ].some((met) => met < 0)
+    ) {
+      continueLoop = false;
+    }
 
-  // if (!isNaN(available_distance_eq4)) {
-  //   n_existing_lower = n_existing_lower + 1;
-  //   percent_to_next_eq4_severity =
-  //     current_severity_distance_eq4 / maxSeverity_eq4;
-  //   normalized_severity_eq4 =
-  //     available_distance_eq4 * percent_to_next_eq4_severity;
-  // }
+    // if any is less than zero this is not the right max
+    i += 1;
+  }
 
-  // if (!isNaN(available_distance_eq5)) {
-  //   // for eq5 is always 0 the percentage
-  //   n_existing_lower = n_existing_lower + 1;
-  //   percent_to_next_eq5_severity = 0;
-  //   normalized_severity_eq5 =
-  //     available_distance_eq5 * percent_to_next_eq5_severity;
-  // }
+  const currentSeverityDistanceeq1 =
+    severityDistanceAV + severityDistancePR + severityDistanceUI;
+  const currentSeverityDistanceeq2 = severityDistanceAC + severityDistanceAT;
+  const currentSeverityDistanceeq3eq6 =
+    severityDistanceVC +
+    severityDistanceVI +
+    severityDistanceVA +
+    severityDistanceCR +
+    severityDistanceIR +
+    severityDistanceAR;
+  const currentSeverityDistanceeq4 =
+    severityDistanceSC + severityDistanceSI + severityDistanceSA;
+  // const currentSeverityDistanceeq5 = 0;
 
-  // // 2. The mean of the above computed proportional distances is computed.
-  // if (n_existing_lower == 0) {
-  //   mean_distance = 0;
-  // } else {
-  //   // sometimes we need to go up but there is nothing there, or down but there is nothing there so it's a change of 0.
-  //   mean_distance =
-  //     (normalized_severity_eq1 +
-  //       normalized_severity_eq2 +
-  //       normalized_severity_eq3eq6 +
-  //       normalized_severity_eq4 +
-  //       normalized_severity_eq5) /
-  //     n_existing_lower;
-  // }
+  const step = 0.1;
 
-  // // 3. The score of the vector is the score of the MacroVector
-  // //    (i.e. the score of the highest severity vector) minus the mean
-  // //    distance so computed. This score is rounded to one decimal place.
-  // value -= mean_distance;
-  // if (value < 0) {
-  //   value = 0.0;
-  // }
-  // if (value > 10) {
-  //   value = 10.0;
-  // }
-  // return value.toFixed(1);
+  // if the next lower macro score do not exist the result is Nan
+  // Rename to maximal scoring difference (aka MSD)
+  const availableDistanceEq1 = value - scoreEq1NextLowerMacro;
+  const availableDistanceEq2 = value - scoreEq2NextLowerMacro;
+  const availableDistanceEq3eq6 = value - scoreEq3eq6NextLowerMacro;
+  const availableDistanceEq4 = value - scoreEq4NextLowerMacro;
+  const availableDistanceEq5 = value - scoreEq5NextLowerMacro;
 
-  return 42;
+  let percentToNextEq1Severity = 0;
+  let percentToNextEq2Severity = 0;
+  let percentToNextEq3eq6Severity = 0;
+  let percentToNextEq4Severity = 0;
+  let percentToNextEq5Severity = 0;
+
+  // some of them do not exist, we will find them by retrieving the score. If score null then do not exist
+  let nExistingLower = 0;
+
+  let normalizedSeverityEq1 = 0;
+  let normalizedSeverityEq2 = 0;
+  let normalizedSeverityEq3eq6 = 0;
+  let normalizedSeverityEq4 = 0;
+  let normalizedSeverityEq5 = 0;
+
+  // multiply by step because distance is pure
+  const maxSeverityEq1 = maxSeverity.eq1[eq1Val] * step;
+  const maxSeverityEq2 = maxSeverity.eq2[eq2Val] * step;
+  const maxSeverityEq3eq6 = maxSeverity.eq3eq6[eq3Val][eq6Val] * step;
+  const maxSeverityEq4 = maxSeverity.eq4[eq4Val] * step;
+
+  //   c. The proportion of the distance is determined by dividing
+  //      the severity distance of the to-be-scored vector by the depth
+  //      of the MacroVector.
+  //   d. The maximal scoring difference is multiplied by the proportion of
+  //      distance.
+  if (!isNaN(availableDistanceEq1)) {
+    nExistingLower += 1;
+    percentToNextEq1Severity = currentSeverityDistanceeq1 / maxSeverityEq1;
+    normalizedSeverityEq1 = availableDistanceEq1 * percentToNextEq1Severity;
+  }
+
+  if (!isNaN(availableDistanceEq2)) {
+    nExistingLower += 1;
+    percentToNextEq2Severity = currentSeverityDistanceeq2 / maxSeverityEq2;
+    normalizedSeverityEq2 = availableDistanceEq2 * percentToNextEq2Severity;
+  }
+
+  if (!isNaN(availableDistanceEq3eq6)) {
+    nExistingLower += 1;
+    percentToNextEq3eq6Severity =
+      currentSeverityDistanceeq3eq6 / maxSeverityEq3eq6;
+    normalizedSeverityEq3eq6 =
+      availableDistanceEq3eq6 * percentToNextEq3eq6Severity;
+  }
+
+  if (!isNaN(availableDistanceEq4)) {
+    nExistingLower += 1;
+    percentToNextEq4Severity = currentSeverityDistanceeq4 / maxSeverityEq4;
+    normalizedSeverityEq4 = availableDistanceEq4 * percentToNextEq4Severity;
+  }
+
+  if (!isNaN(availableDistanceEq5)) {
+    // for eq5 is always 0 the percentage
+    nExistingLower += 1;
+    percentToNextEq5Severity = 0;
+    normalizedSeverityEq5 = availableDistanceEq5 * percentToNextEq5Severity;
+  }
+
+  // 2. The mean of the above computed proportional distances is computed.
+  let meanDistance;
+
+  if (nExistingLower === 0) {
+    meanDistance = 0;
+  } else {
+    // sometimes we need to go up but there is nothing there, or down but there is nothing there so it's a change of 0.
+    meanDistance =
+      (normalizedSeverityEq1 +
+        normalizedSeverityEq2 +
+        normalizedSeverityEq3eq6 +
+        normalizedSeverityEq4 +
+        normalizedSeverityEq5) /
+      nExistingLower;
+  }
+
+  // 3. The score of the vector is the score of the MacroVector
+  //    (i.e. the score of the highest severity vector) minus the mean
+  //    distance so computed. This score is rounded to one decimal place.
+  let result = value - meanDistance;
+
+  if (result < 0) {
+    result = 0.0;
+  }
+  if (result > 10) {
+    result = 10.0;
+  }
+
+  return result.toFixed(1);
 };

@@ -272,4 +272,4 @@ export const cvssLookupGlobal = {
   212201: 1,
   212211: 0.3,
   212221: 0.1,
-});
+};
