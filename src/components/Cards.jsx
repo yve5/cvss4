@@ -45,20 +45,25 @@ const Cards = ({
                           key={metricType + metricGroup + metric + option}
                           className="col-md-6 col-lg-2 d-grid mb-2"
                         >
-                          <button
-                            title={optionsData?.tooltip}
-                            className={getClassNames(
-                              metrics,
-                              metricData?.short,
-                              optionsData?.value
-                            )}
-                            onClick={() =>
-                              changeValue(metricData?.short, optionsData?.value)
-                            }
-                            type="button"
-                          >
-                            {option}
-                          </button>
+                          {option !== '' && (
+                            <button
+                              title={optionsData?.tooltip}
+                              className={getClassNames(
+                                metrics,
+                                metricData?.short,
+                                optionsData?.value
+                              )}
+                              onClick={() =>
+                                changeValue(
+                                  metricData?.short,
+                                  optionsData?.value
+                                )
+                              }
+                              type="button"
+                            >
+                              {option}
+                            </button>
+                          )}
                         </div>
                       )
                     )}

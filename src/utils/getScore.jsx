@@ -2,7 +2,7 @@ import { getMetric } from './getMetric';
 import { getMacroVector } from './getMacroVector';
 
 export const getScore = (metrics) => {
-  const getM = (metric) => getMetric(metrics, metric);
+  // const get = (metric) => getMetric(metrics, metric);
 
   // The following defines the index of each metric's values.
   // It is used when looking for the highest vector part of the

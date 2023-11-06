@@ -1,24 +1,24 @@
 import { getMetric } from './getMetric';
 
 export const getMacroVector = (metrics) => {
-  const getM = (metric) => getMetric(metrics, metric);
+  const get = (metric) => getMetric(metrics, metric);
 
   // EQ1: 0-AV:N and PR:N and UI:N
   //      1-(AV:N or PR:N or UI:N) and not (AV:N and PR:N and UI:N) and not AV:P
   //      2-AV:P or not(AV:N or PR:N or UI:N)
   let eq1;
 
-  if (getM('AV') === 'N' && getM('PR') === 'N' && getM('UI') === 'N') {
+  if (get('AV') === 'N' && get('PR') === 'N' && get('UI') === 'N') {
     eq1 = '0';
   } else if (
-    (getM('AV') === 'N' || getM('PR') === 'N' || getM('UI') === 'N') &&
-    !(getM('AV') === 'N' && getM('PR') === 'N' && getM('UI') === 'N') &&
-    !(getM('AV') === 'P')
+    (get('AV') === 'N' || get('PR') === 'N' || get('UI') === 'N') &&
+    !(get('AV') === 'N' && get('PR') === 'N' && get('UI') === 'N') &&
+    !(get('AV') === 'P')
   ) {
     eq1 = '1';
   } else if (
-    getM('AV') === 'P' ||
-    !(getM('AV') === 'N' || getM('PR') === 'N' || getM('UI') === 'N')
+    get('AV') === 'P' ||
+    !(get('AV') === 'N' || get('PR') === 'N' || get('UI') === 'N')
   ) {
     eq1 = '2';
   }
@@ -27,9 +27,9 @@ export const getMacroVector = (metrics) => {
   //      1-(not(AC:L and AT:N))
   let eq2;
 
-  if (getM('AC') === 'L' && getM('AT') === 'N') {
+  if (get('AC') === 'L' && get('AT') === 'N') {
     eq2 = '0';
-  } else if (!(getM('AC') === 'L' && getM('AT') === 'N')) {
+  } else if (!(get('AC') === 'L' && get('AT') === 'N')) {
     eq2 = '1';
   }
 
@@ -38,16 +38,14 @@ export const getMacroVector = (metrics) => {
   //      2-not (VC:H or VI:H or VA:H)
   let eq3;
 
-  if (getM('VC') === 'H' && getM('VI') === 'H') {
+  if (get('VC') === 'H' && get('VI') === 'H') {
     eq3 = 0;
   } else if (
-    !(getM('VC') === 'H' && getM('VI') === 'H') &&
-    (getM('VC') === 'H' || getM('VI') === 'H' || getM('VA') === 'H')
+    !(get('VC') === 'H' && get('VI') === 'H') &&
+    (get('VC') === 'H' || get('VI') === 'H' || get('VA') === 'H')
   ) {
     eq3 = 1;
-  } else if (
-    !(getM('VC') === 'H' || getM('VI') === 'H' || getM('VA') === 'H')
-  ) {
+  } else if (!(get('VC') === 'H' || get('VI') === 'H' || get('VA') === 'H')) {
     eq3 = 2;
   }
 
@@ -56,16 +54,16 @@ export const getMacroVector = (metrics) => {
   //      2-not (MSI:S or MSA:S) and not (SC:H or SI:H or SA:H)
   let eq4;
 
-  if (getM('MSI') === 'S' || getM('MSA') === 'S') {
+  if (get('MSI') === 'S' || get('MSA') === 'S') {
     eq4 = 0;
   } else if (
-    !(getM('MSI') === 'S' || getM('MSA') === 'S') &&
-    (getM('SC') === 'H' || getM('SI') === 'H' || getM('SA') === 'H')
+    !(get('MSI') === 'S' || get('MSA') === 'S') &&
+    (get('SC') === 'H' || get('SI') === 'H' || get('SA') === 'H')
   ) {
     eq4 = 1;
   } else if (
-    !(getM('MSI') === 'S' || getM('MSA') === 'S') &&
-    !(getM('SC') === 'H' || getM('SI') === 'H' || getM('SA') === 'H')
+    !(get('MSI') === 'S' || get('MSA') === 'S') &&
+    !(get('SC') === 'H' || get('SI') === 'H' || get('SA') === 'H')
   ) {
     eq4 = 2;
   }
@@ -75,11 +73,11 @@ export const getMacroVector = (metrics) => {
   //      2-E:U
   let eq5;
 
-  if (getM('E') === 'A') {
+  if (get('E') === 'A') {
     eq5 = 0;
-  } else if (getM('E') === 'P') {
+  } else if (get('E') === 'P') {
     eq5 = 1;
-  } else if (getM('E') === 'U') {
+  } else if (get('E') === 'U') {
     eq5 = 2;
   }
 
@@ -88,16 +86,16 @@ export const getMacroVector = (metrics) => {
   let eq6;
 
   if (
-    (getM('CR') === 'H' && getM('VC') === 'H') ||
-    (getM('IR') === 'H' && getM('VI') === 'H') ||
-    (getM('AR') === 'H' && getM('VA') === 'H')
+    (get('CR') === 'H' && get('VC') === 'H') ||
+    (get('IR') === 'H' && get('VI') === 'H') ||
+    (get('AR') === 'H' && get('VA') === 'H')
   ) {
     eq6 = 0;
   } else if (
     !(
-      (getM('CR') === 'H' && getM('VC') === 'H') ||
-      (getM('IR') === 'H' && getM('VI') === 'H') ||
-      (getM('AR') === 'H' && getM('VA') === 'H')
+      (get('CR') === 'H' && get('VC') === 'H') ||
+      (get('IR') === 'H' && get('VI') === 'H') ||
+      (get('AR') === 'H' && get('VA') === 'H')
     )
   ) {
     eq6 = 1;

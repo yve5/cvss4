@@ -1,41 +1,9 @@
 import reducer from './Reducer';
+import { defaultMetrics } from '../resources/fakeData';
 import { changeValue } from '../actions/All';
 
 const initialState = {
-  metrics: {
-    AC: 'L',
-    AR: 'X',
-    AT: 'N',
-    AU: 'X',
-    AV: 'N',
-    CR: 'X',
-    E: 'X',
-    IR: 'X',
-    MAC: 'X',
-    MAT: 'X',
-    MAV: 'X',
-    MPR: 'X',
-    MSA: 'X',
-    MSC: 'X',
-    MSI: 'X',
-    MUI: 'X',
-    MVA: 'X',
-    MVC: 'X',
-    MVI: 'X',
-    PR: 'N',
-    R: 'X',
-    RE: 'X',
-    S: 'X',
-    SA: 'N',
-    SC: 'N',
-    SI: 'N',
-    U: 'X',
-    UI: 'N',
-    V: 'X',
-    VA: 'N',
-    VC: 'N',
-    VI: 'N',
-  },
+  metrics: defaultMetrics,
 };
 
 describe('Reducer', () => {
