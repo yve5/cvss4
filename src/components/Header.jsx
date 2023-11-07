@@ -2,31 +2,55 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import * as All from '../actions/All';
-import { getScore } from '../utils';
+import { getScore, getVector } from '../utils';
 
 const Header = ({
   root: {
     cvss4: { metrics },
   },
   resetScore,
-}) => (
-  <header style={{ marginTop: '6rem' }}>
-    <div className="container fixed-top bg-body">
-      <div className="row">
-        <div className="col-lg-8 offset-lg-2 border-bottom">
-          <div className="row">
-            <div className="col-6 fs-3">CVSS v4.0</div>
-            <div className="col-6 fs-3 text-end">
-              Score : {getScore(metrics)}
+}) => {
+  const currentScore = getVector(metrics);
+
+  return (
+    <header style={{ marginTop: '7rem' }}>
+      <div className="container fixed-top bg-body">
+        <div className="row">
+          <div className="col-lg-8 offset-lg-2 border-bottom">
+            <div className="d-flex justify-content-between align-self-center">
+              <span className="display-5">CVSS 4.0</span>
+              <span className="display-5 text-end">
+                Score:{getScore(metrics)}
+              </span>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-6 fs-3">VECTOR</div>
-            <div className="col-6 fs-3 text-end">
+
+            <div className="input-group input-group-sm my-2">
               <button
-                className="btn btn-sm btn-outline-primary mb-2"
-                onClick={() => resetScore(metrics)}
+                className="btn btn-outline-secondary"
+                data-testid="button-copy-vector"
+                type="button"
+                onClick={() =>
+                  // eslint-disable-next-line
+                  window.prompt(
+                    'Copy to clipboard: Ctrl+C, Enter',
+                    currentScore
+                  )
+                }
+              >
+                Copy
+              </button>
+
+              <input
+                className="form-control"
+                value={currentScore}
+                type="text"
+                readOnly
+              />
+
+              <button
+                className="btn btn-outline-danger"
                 data-testid="button-reset-score"
+                onClick={() => resetScore()}
                 type="button"
               >
                 Reset
@@ -35,9 +59,9 @@ const Header = ({
           </div>
         </div>
       </div>
-    </div>
-  </header>
-);
+    </header>
+  );
+};
 
 const mapStateToProps = (state) => ({
   root: state,

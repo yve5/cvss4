@@ -1,15 +1,20 @@
-export const extractValueMetric = (metric, str) => {
-  let metricVal;
+export const extractValueMetric = (metric, vector) => {
+  if (!metric || !vector) {
+    return '';
+  }
+
+  let value;
 
   // indexOf gives first index of the metric, we then need to go over its size
-  const extracted = str.slice(str.indexOf(metric) + metric.length + 1);
+  const extracted = vector.slice(vector.indexOf(metric) + metric.length + 1);
 
   // remove what follow
   if (extracted.indexOf('/') > 0) {
-    metricVal = extracted.substring(0, extracted.indexOf('/'));
+    value = extracted.substring(0, extracted.indexOf('/'));
   } else {
     // case where it is the last metric so no ending /
-    metricVal = extracted;
+    value = extracted;
   }
-  return metricVal;
+
+  return value;
 };

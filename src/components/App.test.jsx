@@ -12,12 +12,14 @@ test('renders learn react link', () => {
       <App />
     </Provider>
   );
-  const linkElement = screen.getByText(/CVSS v4.0/i);
+  const linkElement = screen.getByText(/CVSS 4.0/i);
   expect(linkElement).toBeInTheDocument();
 });
 
 test('should match expected snapshot', () => {
   const mockStore = configureMockStore();
+
+  window.prompt = jest.fn();
 
   const component = create(
     <Provider store={mockStore({ cvss4: {} })}>
@@ -36,6 +38,12 @@ test('should match expected snapshot', () => {
   act(() => {
     component.root
       .findAllByProps({ 'data-testid': 'button-metric-change-value' })[7]
+      .props.onClick();
+  });
+
+  act(() => {
+    component.root
+      .findByProps({ 'data-testid': 'button-copy-vector' })
       .props.onClick();
   });
 

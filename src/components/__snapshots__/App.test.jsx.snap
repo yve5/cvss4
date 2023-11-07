@@ -5,7 +5,7 @@ Array [
   <header
     style={
       Object {
-        "marginTop": "6rem",
+        "marginTop": "7rem",
       }
     }
   >
@@ -19,40 +19,45 @@ Array [
           className="col-lg-8 offset-lg-2 border-bottom"
         >
           <div
-            className="row"
+            className="d-flex justify-content-between align-self-center"
           >
-            <div
-              className="col-6 fs-3"
+            <span
+              className="display-5"
             >
-              CVSS v4.0
-            </div>
-            <div
-              className="col-6 fs-3 text-end"
+              CVSS 4.0
+            </span>
+            <span
+              className="display-5 text-end"
             >
-              Score : 
+              Score:
               1.0
-            </div>
+            </span>
           </div>
           <div
-            className="row"
+            className="input-group input-group-sm my-2"
           >
-            <div
-              className="col-6 fs-3"
+            <button
+              className="btn btn-outline-secondary"
+              data-testid="button-copy-vector"
+              onClick={[Function]}
+              type="button"
             >
-              VECTOR
-            </div>
-            <div
-              className="col-6 fs-3 text-end"
+              Copy
+            </button>
+            <input
+              className="form-control"
+              readOnly={true}
+              type="text"
+              value="CVSS:4.0"
+            />
+            <button
+              className="btn btn-outline-danger"
+              data-testid="button-reset-score"
+              onClick={[Function]}
+              type="button"
             >
-              <button
-                className="btn btn-sm btn-outline-primary mb-2"
-                data-testid="button-reset-score"
-                onClick={[Function]}
-                type="button"
-              >
-                Reset
-              </button>
-            </div>
+              Reset
+            </button>
           </div>
         </div>
       </div>
