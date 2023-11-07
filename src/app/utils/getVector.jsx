@@ -1,4 +1,4 @@
-import { expectedMetricOrder } from '../references/metrics';
+import { expectedMetricOrder } from '../../references/metrics';
 
 export const getVector = (metrics) => {
   let vector = 'CVSS:4.0';

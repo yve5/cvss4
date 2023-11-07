@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import * as All from '../actions/All';
-import { getScore, getVector } from '../utils';
+import { getVector } from '../utils';
+import { getScore } from '../../cvss4Score';
 
 const Header = ({
   root: {

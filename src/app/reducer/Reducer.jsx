@@ -1,5 +1,5 @@
 import { CVSS4_CHANGE_VALUE, CVSS4_RESET_SCORE } from '../resources/constants';
-import { cvssConfig } from '../references/cvssConfig';
+import { cvssConfig } from '../../references/cvssConfig';
 import { initMetrics } from '../utils';
 
 const initialState = {

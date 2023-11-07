@@ -1,5 +1,5 @@
 import reducer from './Reducer';
-import { defaultMetrics } from '../resources/fakeData';
+import { defaultMetrics } from '../../cvss4Score/resources/fakeData';
 import { changeValue, resetScore } from '../actions/All';
 
 const initialState = {

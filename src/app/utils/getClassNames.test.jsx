@@ -1,4 +1,4 @@
-import { defaultMetrics } from '../resources/fakeData';
+import { defaultMetrics } from '../../cvss4Score/resources/fakeData';
 import { getClassNames } from './getClassNames';
 
 describe('getClassNames', () => {

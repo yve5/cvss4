@@ -1,6 +1,6 @@
 import { initMetrics } from './initMetrics';
-import { defaultMetrics } from '../resources/fakeData';
-import { cvssConfig } from '../references/cvssConfig';
+import { defaultMetrics } from '../../cvss4Score/resources/fakeData';
+import { cvssConfig } from '../../references/cvssConfig';
 
 describe('initMetrics', () => {
   it('should initialize metrics. undefined', () => {

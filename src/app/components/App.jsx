@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './Card';
 import Header from './Header';
-import { cvssConfig } from '../references/cvssConfig';
+import { cvssConfig } from '../../references/cvssConfig';
 
 const App = () => (
   <>
