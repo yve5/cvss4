@@ -1,6 +1,6 @@
 {
   "name": "cvss4",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "homepage": "http://yve5.github.io/cvss4",
   "dependencies": {
@@ -51,7 +51,9 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
-      "!src/{index,reportWebVitals}.{js,jsx}"
+      "!src/{index,reportWebVitals}.{js,jsx}",
+      "!src/references/index.html",
+      "!src/references/app.js"
     ]
   }
 }

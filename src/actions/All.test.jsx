@@ -1,4 +1,5 @@
-import { changeValue } from './All';
+import { changeValue, resetScore } from './All';
+import { defaultMetrics } from '../resources/fakeData';
 
 describe('Actions', () => {
   it('should handle CVSS4_CHANGE_VALUE', () => {
@@ -6,6 +7,13 @@ describe('Actions', () => {
       type: 'CVSS4_CHANGE_VALUE',
       metric: 'AV',
       value: 'A',
+    });
+  });
+
+  it('should handle CVSS4_RESET_SCORE', () => {
+    expect(resetScore(undefined)).toEqual({
+      type: 'CVSS4_RESET_SCORE',
+      metrics: defaultMetrics,
     });
   });
 });

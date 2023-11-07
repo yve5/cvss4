@@ -39,5 +39,11 @@ test('should match expected snapshot', () => {
       .props.onClick();
   });
 
+  act(() => {
+    component.root
+      .findByProps({ 'data-testid': 'button-reset-score' })
+      .props.onClick();
+  });
+
   expect(component.toJSON()).toMatchSnapshot();
 });

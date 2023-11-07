@@ -3,24 +3,57 @@
 exports[`should match expected snapshot 1`] = `
 Array [
   <header
-    className="mt-5"
+    style={
+      Object {
+        "marginTop": "6rem",
+      }
+    }
   >
     <div
-      className="container fixed-top border-bottom bg-body"
+      className="container fixed-top bg-body"
     >
       <div
-        className="row "
+        className="row"
       >
         <div
-          className="col-6 fs-2"
+          className="col-lg-8 offset-lg-2 border-bottom"
         >
-          CVSS v4.0
-        </div>
-        <div
-          className="col-6 fs-2 text-end"
-        >
-          Score : 
-          1.0
+          <div
+            className="row"
+          >
+            <div
+              className="col-6 fs-3"
+            >
+              CVSS v4.0
+            </div>
+            <div
+              className="col-6 fs-3 text-end"
+            >
+              Score : 
+              1.0
+            </div>
+          </div>
+          <div
+            className="row"
+          >
+            <div
+              className="col-6 fs-3"
+            >
+              VECTOR
+            </div>
+            <div
+              className="col-6 fs-3 text-end"
+            >
+              <button
+                className="btn btn-sm btn-outline-primary mb-2"
+                data-testid="button-reset-score"
+                onClick={[Function]}
+                type="button"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -32,13 +65,13 @@ Array [
       className="row"
     >
       <div
-        className="col"
+        className="col-lg-8 offset-lg-2"
       >
         <div
           className="card my-3"
         >
           <div
-            className="card-header text-center"
+            className="card-header"
             title="This category is usually filled by the supplier"
           >
             Base Metrics
@@ -57,7 +90,7 @@ Array [
                 className="col-md-8 offset-md-4"
               >
                 <h5
-                  className="card-title mb-3"
+                  className="card-title mb-1"
                 >
                   Exploitability Metrics
                 </h5>
@@ -88,7 +121,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The vulnerable system is bound to the network stack and the set of possible attackers extends beyond the other options listed below, up to and including the entire Internet. Such a vulnerability is often termed “remotely exploitable” and can be thought of as an attack being exploitable at the protocol level one or more network hops away (e.g., across one or more routers)."
@@ -97,7 +130,7 @@ Array [
                     Network (N)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The vulnerable system is bound to a protocol stack, but the attack is limited at the protocol level to a logically adjacent topology. This can mean an attack must be launched from the same shared proximity (e.g., Bluetooth, NFC, or IEEE 802.11) or logical network (e.g., local IP subnet), or from within a secure or otherwise limited administrative domain (e.g., MPLS, secure VPN within an administrative network zone)."
@@ -106,7 +139,7 @@ Array [
                     Adjacent (A)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The vulnerable system is not bound to the network stack and the attacker’s path is via read/write/execute capabilities. Either the attacker exploits the vulnerability by accessing the target system locally (e.g., keyboard, console), or through terminal emulation (e.g., SSH); or the attacker relies on User Interaction by another person to perform actions required to exploit the vulnerability (e.g., using social engineering techniques to trick a legitimate user into opening a malicious document)."
@@ -115,7 +148,7 @@ Array [
                     Local (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The attack requires the attacker to physically touch or manipulate the vulnerable system. Physical interaction may be brief (e.g., evil maid attack) or persistent."
@@ -151,7 +184,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The attacker must take no measurable action to exploit the vulnerability. The attack requires no target-specific circumvention to exploit the vulnerability. An attacker can expect repeatable success against the vulnerable system."
@@ -160,7 +193,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The successful attack depends on the evasion or circumvention of security-enhancing techniques in place that would otherwise hinder the attack. These include: Evasion of exploit mitigation techniques, for example, circumvention of address space randomization (ASLR) or data execution prevention (DEP) must be performed for the attack to be successful; Obtaining target-specific secrets. The attacker must gather some target-specific secret before the attack can be successful. A secret is any piece of information that cannot be obtained through any amount of reconnaissance. To obtain the secret the attacker must perform additional attacks or break otherwise secure measures (e.g. knowledge of a secret key may be needed to break a crypto channel). This operation must be performed for each attacked target."
@@ -196,7 +229,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The successful attack does not depend on the deployment and execution conditions of the vulnerable system. The attacker can expect to be able to reach the vulnerability and execute the exploit under all or most instances of the vulnerability."
@@ -205,7 +238,7 @@ Array [
                     None (N)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The successful attack depends on the presence of specific deployment and execution conditions of the vulnerable system that enable the attack. These include: a race condition must be won to successfully exploit the vulnerability (the successfulness of the attack is conditioned on execution conditions that are not under full control of the attacker, or the attack may need to be launched multiple times against a single target before being successful); the attacker must inject themselves into the logical network path between the target and the resource requested by the victim (e.g. vulnerabilities requiring an on-path attacker)."
@@ -241,7 +274,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The attacker is unauthorized prior to attack, and therefore does not require any access to settings or files of the vulnerable system to carry out an attack."
@@ -250,7 +283,7 @@ Array [
                     None (N)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The attacker requires privileges that provide basic capabilities that are typically limited to settings and resources owned by a single low-privileged user. Alternatively, an attacker with Low privileges has the ability to access only non-sensitive resources."
@@ -259,7 +292,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The attacker requires privileges that provide significant (e.g., administrative) control over the vulnerable system allowing full access to the vulnerable system’s settings and files."
@@ -295,7 +328,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The vulnerable system can be exploited without interaction from any human user, other than the attacker."
@@ -304,7 +337,7 @@ Array [
                     None (N)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Successful exploitation of this vulnerability requires limited interaction by the targeted user with the vulnerable system and the attacker’s payload. These interactions would be considered involuntary and do not require that the user actively subvert protections built into the vulnerable system."
@@ -313,7 +346,7 @@ Array [
                     Passive (P)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Successful exploitation of this vulnerability requires a targeted user to perform specific, conscious interactions with the vulnerable system and the attacker’s payload, or the user’s interactions would actively subvert protection mechanisms which would lead to exploitation of the vulnerability."
@@ -335,7 +368,7 @@ Array [
                 className="col-md-8 offset-md-4"
               >
                 <h5
-                  className="card-title mb-3"
+                  className="card-title mb-1"
                 >
                   Vulnerable System Impact Metrics
                 </h5>
@@ -366,7 +399,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is a total loss of confidentiality, resulting in all information within the Vulnerable System being divulged to the attacker. Alternatively, access to only some restricted information is obtained, but the disclosed information presents a direct, serious impact. For example, an attacker steals the administrator's password, or private encryption keys of a web server."
@@ -375,7 +408,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is some loss of confidentiality. Access to some restricted information is obtained, but the attacker does not have control over what information is obtained, or the amount or kind of loss is limited. The information disclosure does not cause a direct, serious loss to the Vulnerable System."
@@ -384,7 +417,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is no loss of confidentiality within the Vulnerable System."
@@ -420,7 +453,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is a total loss of integrity, or a complete loss of protection. For example, the attacker is able to modify any/all files protected by the vulnerable system. Alternatively, only some files can be modified, but malicious modification would present a direct, serious consequence to the vulnerable system."
@@ -429,7 +462,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Modification of data is possible, but the attacker does not have control over the consequence of a modification, or the amount of modification is limited. The data modification does not have a direct, serious impact to the Vulnerable System."
@@ -438,7 +471,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is no loss of integrity within the Vulnerable System."
@@ -474,7 +507,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is a total loss of availability, resulting in the attacker being able to fully deny access to resources in the Vulnerable System; this loss is either sustained (while the attacker continues to deliver the attack) or persistent (the condition persists even after the attack has completed). Alternatively, the attacker has the ability to deny some availability, but the loss of availability presents a direct, serious consequence to the Vulnerable System (e.g., the attacker cannot disrupt existing connections, but can prevent new connections; the attacker can repeatedly exploit a vulnerability that, in each instance of a successful attack, leaks a only small amount of memory, but after repeated exploitation causes a service to become completely unavailable)."
@@ -483,7 +516,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Performance is reduced or there are interruptions in resource availability. Even if repeated exploitation of the vulnerability is possible, the attacker does not have the ability to completely deny service to legitimate users. The resources in the Vulnerable System are either partially available all of the time, or fully available only some of the time, but overall there is no direct, serious consequence to the Vulnerable System."
@@ -492,7 +525,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is no impact to availability within the Vulnerable System."
@@ -514,7 +547,7 @@ Array [
                 className="col-md-8 offset-md-4"
               >
                 <h5
-                  className="card-title mb-3"
+                  className="card-title mb-1"
                 >
                   Subsequent System Impact Metrics
                 </h5>
@@ -545,7 +578,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is a total loss of confidentiality, resulting in all resources within the Subsequent System being divulged to the attacker. Alternatively, access to only some restricted information is obtained, but the disclosed information presents a direct, serious impact. For example, an attacker steals the administrator's password, or private encryption keys of a web server."
@@ -554,7 +587,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is some loss of confidentiality. Access to some restricted information is obtained, but the attacker does not have control over what information is obtained, or the amount or kind of loss is limited. The information disclosure does not cause a direct, serious loss to the Subsequent System."
@@ -563,7 +596,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is no loss of confidentiality within the Subsequent System or all confidentiality impact is constrained to the Vulnerable System."
@@ -599,7 +632,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is a total loss of integrity, or a complete loss of protection. For example, the attacker is able to modify any/all files protected by the Subsequent System. Alternatively, only some files can be modified, but malicious modification would present a direct, serious consequence to the Subsequent System."
@@ -608,7 +641,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Modification of data is possible, but the attacker does not have control over the consequence of a modification, or the amount of modification is limited. The data modification does not have a direct, serious impact to the Subsequent System."
@@ -617,7 +650,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is no loss of integrity within the Subsequent System or all integrity impact is constrained to the Vulnerable System."
@@ -653,7 +686,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is a total loss of availability, resulting in the attacker being able to fully deny access to resources in the Subsequent System; this loss is either sustained (while the attacker continues to deliver the attack) or persistent (the condition persists even after the attack has completed). Alternatively, the attacker has the ability to deny some availability, but the loss of availability presents a direct, serious consequence to the Subsequent System (e.g., the attacker cannot disrupt existing connections, but can prevent new connections; the attacker can repeatedly exploit a vulnerability that, in each instance of a successful attack, leaks a only small amount of memory, but after repeated exploitation causes a service to become completely unavailable)."
@@ -662,7 +695,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Performance is reduced or there are interruptions in resource availability. Even if repeated exploitation of the vulnerability is possible, the attacker does not have the ability to completely deny service to legitimate users. The resources in the Subsequent System are either partially available all of the time, or fully available only some of the time, but overall there is no direct, serious consequence to the Subsequent System."
@@ -671,7 +704,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-primary btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="There is no impact to availability within the Subsequent System or all availability impact is constrained to the Vulnerable System."
@@ -688,7 +721,7 @@ Array [
           className="card my-3"
         >
           <div
-            className="card-header text-center"
+            className="card-header"
             title="This category is usually filled by the supplier"
           >
             Supplemental Metrics
@@ -725,7 +758,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -734,7 +767,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Consequences of the vulnerability meet definition of IEC 61508 consequence category \\"negligible.\\""
@@ -743,7 +776,7 @@ Array [
                     Negligible (N)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Consequences of the vulnerability meet definition of IEC 61508 consequence categories of \\"marginal,\\" \\"critical,\\" or \\"catastrophic.\\""
@@ -779,7 +812,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -788,7 +821,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Attackers cannot reliably automate all 4 steps of the kill chain for this vulnerability for some reason. These steps are reconnaissance, weaponization, delivery, and exploitation."
@@ -797,7 +830,7 @@ Array [
                     No (N)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Attackers can reliably automate all 4 steps of the kill chain. These steps are reconnaissance, weaponization, delivery, and exploitation (e.g., the vulnerability is “wormable”)."
@@ -833,7 +866,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -842,7 +875,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The system recovers services automatically after an attack has been performed."
@@ -851,7 +884,7 @@ Array [
                     Automatic (A)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The system requires manual intervention by the user to recover services, after an attack has been performed."
@@ -860,7 +893,7 @@ Array [
                     User (U)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The system services are irrecoverable by the user, after an attack has been performed."
@@ -896,7 +929,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -905,7 +938,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The vulnerable system has limited resources. That is, the resources that the attacker will gain control over with a single exploitation event are relatively small. An example of Diffuse (think: limited) Value Density would be an attack on a single email client vulnerability."
@@ -914,7 +947,7 @@ Array [
                     Diffuse (D)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The vulnerable system is rich in resources. Heuristically, such systems are often the direct responsibility of “system operators” rather than users. An example of Concentrated (think: broad) Value Density would be an attack on a central email server."
@@ -950,7 +983,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -959,7 +992,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The effort required to respond to a vulnerability is low/trivial. Examples include: communication on better documentation, configuration workarounds, or guidance from the vendor that does not require an immediate update, upgrade, or replacement by the consuming entity, such as firewall filter configuration."
@@ -968,7 +1001,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The actions required to respond to a vulnerability require some effort on behalf of the consumer and could cause minimal service impact to implement. Examples include: simple remote update, disabling of a subsystem, or a low-touch software upgrade such as a driver update."
@@ -977,7 +1010,7 @@ Array [
                     Moderate (M)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The actions required to respond to a vulnerability are significant and/or difficult, and may possibly lead to an extended, scheduled service impact.  This would need to be considered for scheduling purposes including honoring any embargo on deployment of the selected response. Alternatively, response to the vulnerability in the field is not possible remotely. The only resolution to the vulnerability involves physical replacement (e.g. units deployed would have to be recalled for a depot level repair or replacement). Examples include: a highly privileged driver update, microcode or UEFI BIOS updates, or software upgrades requiring careful analysis and understanding of any potential infrastructure impact before implementation. A UEFI BIOS update that impacts Trusted Platform Module (TPM) attestation without impacting disk encryption software such as Bit locker is a good recent example. Irreparable failures such as non-bootable flash subsystems, failed disks or solid-state drives (SSD), bad memory modules, network devices, or other non-recoverable under warranty hardware, should also be scored as having a High effort."
@@ -1013,7 +1046,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -1022,7 +1055,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Provider has assessed the impact of this vulnerability as having no urgency (Informational)."
@@ -1031,7 +1064,7 @@ Array [
                     Clear
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Provider has assessed the impact of this vulnerability as having a reduced urgency."
@@ -1040,7 +1073,7 @@ Array [
                     Green
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Provider has assessed the impact of this vulnerability as having a moderate urgency."
@@ -1049,7 +1082,7 @@ Array [
                     Amber
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-success btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Provider has assessed the impact of this vulnerability as having the highest urgency."
@@ -1066,7 +1099,7 @@ Array [
           className="card my-3"
         >
           <div
-            className="card-header text-center"
+            className="card-header"
             title="This category is usually filled by the consumer"
           >
             Environmental (Modified Base Metrics)
@@ -1085,7 +1118,7 @@ Array [
                 className="col-md-8 offset-md-4"
               >
                 <h5
-                  className="card-title mb-3"
+                  className="card-title mb-1"
                 >
                   Exploitability Metrics
                 </h5>
@@ -1116,7 +1149,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -1125,7 +1158,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1134,7 +1167,7 @@ Array [
                     Network (N)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1143,7 +1176,7 @@ Array [
                     Adjacent (A)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1152,7 +1185,7 @@ Array [
                     Local (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1188,7 +1221,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -1197,7 +1230,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1206,7 +1239,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1242,7 +1275,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -1251,7 +1284,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1260,7 +1293,7 @@ Array [
                     None (N)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1296,7 +1329,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -1305,7 +1338,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1314,7 +1347,7 @@ Array [
                     None (N)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1323,7 +1356,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1359,7 +1392,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -1368,7 +1401,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1377,7 +1410,7 @@ Array [
                     None (N)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1386,7 +1419,7 @@ Array [
                     Passive (P)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1408,7 +1441,7 @@ Array [
                 className="col-md-8 offset-md-4"
               >
                 <h5
-                  className="card-title mb-3"
+                  className="card-title mb-1"
                 >
                   Vulnerable System Impact Metrics
                 </h5>
@@ -1439,7 +1472,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -1448,7 +1481,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1457,7 +1490,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1466,7 +1499,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1502,7 +1535,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -1511,7 +1544,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1520,7 +1553,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1529,7 +1562,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1565,7 +1598,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -1574,7 +1607,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1583,7 +1616,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1592,7 +1625,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1614,7 +1647,7 @@ Array [
                 className="col-md-8 offset-md-4"
               >
                 <h5
-                  className="card-title mb-3"
+                  className="card-title mb-1"
                 >
                   Subsequent System Impact Metrics
                 </h5>
@@ -1645,7 +1678,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -1654,7 +1687,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1663,7 +1696,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1672,7 +1705,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1708,7 +1741,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -1717,7 +1750,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The exploited vulnerability will result in integrity impacts that could cause serious injury or worse (categories of \\"Marginal\\" or worse as described in IEC 61508) to a human actor or participant."
@@ -1726,7 +1759,7 @@ Array [
                     Safety (S)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1735,7 +1768,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1744,7 +1777,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1780,7 +1813,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The metric has not been evaluated."
@@ -1789,7 +1822,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The exploited vulnerability will result in availability impacts that could cause serious injury or worse (categories of \\"Marginal\\" or worse as described in IEC 61508) to a human actor or participant."
@@ -1798,7 +1831,7 @@ Array [
                     Safety (S)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1807,7 +1840,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1816,7 +1849,7 @@ Array [
                     Low (L)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-danger btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="This metric values has the same definition as the Base Metric value defined above."
@@ -1833,7 +1866,7 @@ Array [
           className="card my-3"
         >
           <div
-            className="card-header text-center"
+            className="card-header"
             title="This category is usually filled by the consumer"
           >
             Environmental (Security Requirements)
@@ -1870,7 +1903,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-warning btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Assigning this value indicates there is insufficient information to choose one of the other values, and has no impact on the overall Environmental Score"
@@ -1879,7 +1912,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-warning btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Loss of Confidentiality is likely to have a catastrophic adverse effect on the organization or individuals associated with the organization."
@@ -1888,7 +1921,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-warning btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Loss of Confidentiality is likely to have a serious adverse effect on the organization or individuals associated with the organization."
@@ -1897,7 +1930,7 @@ Array [
                     Medium (M)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-warning btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Loss of Confidentiality is likely to have only a limited adverse effect on the organization or individuals associated with the organization."
@@ -1933,7 +1966,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-warning btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Assigning this value indicates there is insufficient information to choose one of the other values, and has no impact on the overall Environmental Score"
@@ -1942,7 +1975,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-warning btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Loss of Integrity is likely to have a catastrophic adverse effect on the organization or individuals associated with the organization."
@@ -1951,7 +1984,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-warning btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Loss of Integrity is likely to have a serious adverse effect on the organization or individuals associated with the organization."
@@ -1960,7 +1993,7 @@ Array [
                     Medium (M)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-warning btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Loss of Integrity is likely to have only a limited adverse effect on the organization or individuals associated with the organization."
@@ -1996,7 +2029,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-warning btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Assigning this value indicates there is insufficient information to choose one of the other values, and has no impact on the overall Environmental Score"
@@ -2005,7 +2038,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-warning btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Loss of Availability is likely to have a catastrophic adverse effect on the organization or individuals associated with the organization."
@@ -2014,7 +2047,7 @@ Array [
                     High (H)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-warning btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Loss of Availability is likely to have a serious adverse effect on the organization or individuals associated with the organization."
@@ -2023,7 +2056,7 @@ Array [
                     Medium (M)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-warning btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Loss of Availability is likely to have only a limited adverse effect on the organization or individuals associated with the organization."
@@ -2040,7 +2073,7 @@ Array [
           className="card my-3"
         >
           <div
-            className="card-header text-center"
+            className="card-header"
             title="This category is usually filled by the consumer"
           >
             Threat Metrics
@@ -2077,7 +2110,7 @@ Array [
                   role="group"
                 >
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-info btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="The Exploit Maturity metric is not being used.  Reliable threat intelligence is not available to determine Exploit Maturity characteristics."
@@ -2086,7 +2119,7 @@ Array [
                     Not Defined (X)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-info btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Based on threat intelligence sources either of the following must apply:
@@ -2097,7 +2130,7 @@ Array [
                     Attacked (A)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-info btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Based on threat intelligence sources each of the following must apply:
@@ -2109,7 +2142,7 @@ Array [
                     POC (P)
                   </button>
                   <button
-                    className="btn btn-outline-success btn-block btn-sm"
+                    className="btn btn-info btn-sm"
                     data-testid="button-metric-change-value"
                     onClick={[Function]}
                     title="Based on threat intelligence sources each of the following must apply:

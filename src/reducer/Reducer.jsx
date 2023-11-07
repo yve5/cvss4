@@ -1,4 +1,4 @@
-import { CVSS4_CHANGE_VALUE } from '../resources/constants';
+import { CVSS4_CHANGE_VALUE, CVSS4_RESET_SCORE } from '../resources/constants';
 import { cvssConfig } from '../references/cvssConfig';
 import { initMetrics } from '../utils';
 
@@ -8,6 +8,12 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case CVSS4_RESET_SCORE:
+      return {
+        ...state,
+        ...action,
+      };
+
     case CVSS4_CHANGE_VALUE: {
       const updatedMetric = {};
       updatedMetric[action.metric] = action.value;

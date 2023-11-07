@@ -1,6 +1,6 @@
 import reducer from './Reducer';
 import { defaultMetrics } from '../resources/fakeData';
-import { changeValue } from '../actions/All';
+import { changeValue, resetScore } from '../actions/All';
 
 const initialState = {
   metrics: defaultMetrics,
@@ -19,6 +19,13 @@ describe('Reducer', () => {
         ...initialState.metrics,
         MSA: 'H',
       },
+    });
+  });
+
+  it('should handle CVSS4_RESET_SCORE', () => {
+    expect(reducer(undefined, resetScore())).toEqual({
+      ...initialState,
+      type: 'CVSS4_RESET_SCORE',
     });
   });
 });
