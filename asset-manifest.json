@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/cvss4/static/js/main.c20ef98d.js",
+    "main.js": "/cvss4/static/js/main.01b342cb.js",
     "index.html": "/cvss4/index.html",
-    "main.c20ef98d.js.map": "/cvss4/static/js/main.c20ef98d.js.map"
+    "main.01b342cb.js.map": "/cvss4/static/js/main.01b342cb.js.map"
   },
   "entrypoints": [
-    "static/js/main.c20ef98d.js"
+    "static/js/main.01b342cb.js"
   ]
 }
