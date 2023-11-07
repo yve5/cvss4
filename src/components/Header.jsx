@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { getScore } from '../utils';
@@ -7,20 +7,16 @@ const Header = ({
   root: {
     cvss4: { metrics },
   },
-}) => {
-  const inScore = getScore(metrics);
-
-  useEffect(() => {
-    console.log('Score', inScore);
-  }, [inScore]);
-
-  return (
-    <header className="py-3">
-      <h1 className="display-6">CVSS v4.0 Calculator</h1>
-      <h2>Score : {inScore}</h2>
-    </header>
-  );
-};
+}) => (
+  <header className="mt-5">
+    <div className="container fixed-top border-bottom bg-body">
+      <div className="row ">
+        <div className="col-6 fs-2">CVSS v4.0</div>
+        <div className="col-6 fs-2 text-end">Score : {getScore(metrics)}</div>
+      </div>
+    </div>
+  </header>
+);
 
 const mapStateToProps = (state) => ({
   root: state,

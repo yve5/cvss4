@@ -23,50 +23,46 @@ const Cards = ({
         {Object.entries(metricGroups).map(([metricGroup, metricGroupData]) => (
           <div className="card-body" key={metricType + metricGroup}>
             {metricGroup && (
-              <h5 className="card-title text-center mb-3">{metricGroup}</h5>
+              <div className="row">
+                <div className="col-md-8 offset-md-4">
+                  <h5 className="card-title mb-3">{metricGroup}</h5>
+                </div>
+              </div>
             )}
 
             {Object.entries(metricGroupData).map(([metric, metricData]) => (
               <div className="row my-2" key={metricType + metricGroup + metric}>
-                <div className="col-md-3">
+                <div className="col-md-4">
                   <p
-                    className="card-text text-md-end mt-1"
+                    className="card-text text-md-end mt-2 mt-md-1 mb-2 mb-md-0"
                     title={metricData?.tooltip}
                   >
                     {metric} <sup>?</sup>
                   </p>
                 </div>
 
-                <div className="col-md-9">
-                  <div className="row">
-                    {Object.entries(metricData?.options).map(
-                      ([option, optionsData]) => (
-                        <div
+                <div className="col-md-8">
+                  <div className="btn-group" role="group">
+                    {Object.entries(metricData?.options)
+                      .filter(([option]) => option !== '')
+                      .map(([option, optionsData]) => (
+                        <button
                           key={metricType + metricGroup + metric + option}
-                          className="col-md-6 col-lg-2 d-grid mb-2"
-                        >
-                          {option !== '' && (
-                            <button
-                              title={optionsData?.tooltip}
-                              className={getClassNames(
-                                metrics,
-                                metricData?.short,
-                                optionsData?.value
-                              )}
-                              onClick={() =>
-                                changeValue(
-                                  metricData?.short,
-                                  optionsData?.value
-                                )
-                              }
-                              type="button"
-                            >
-                              {option}
-                            </button>
+                          data-testid="button-metric-change-value"
+                          title={optionsData?.tooltip}
+                          className={getClassNames(
+                            metrics,
+                            metricData?.short,
+                            optionsData?.value
                           )}
-                        </div>
-                      )
-                    )}
+                          onClick={() =>
+                            changeValue(metricData?.short, optionsData?.value)
+                          }
+                          type="button"
+                        >
+                          {option}
+                        </button>
+                      ))}
                   </div>
                 </div>
               </div>

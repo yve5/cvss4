@@ -3,14 +3,17 @@ import Cards from './Cards';
 import Header from './Header';
 
 const App = () => (
-  <div className="container">
-    <div className="row">
-      <div className="col">
-        <Header />
-        <Cards />
+  <>
+    <Header />
+
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          <Cards />
+        </div>
       </div>
     </div>
-  </div>
+  </>
 );
 
 export default App;
