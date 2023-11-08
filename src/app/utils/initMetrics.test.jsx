@@ -1,5 +1,5 @@
 import { initMetrics } from './initMetrics';
-import { defaultMetrics } from '../../cvss4Score/resources/fakeData';
+import { defaultMetrics } from '../../cvss4/resources/fakeData';
 import { cvssConfig } from '../../references/cvssConfig';
 
 describe('initMetrics', () => {

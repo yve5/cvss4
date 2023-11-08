@@ -6,6 +6,10 @@ import { cvssLookupGlobal as lookup } from '../references/cvssLookup';
 import { maxSeverity } from '../references/maxSeverity';
 
 export const getScore = (metrics) => {
+  if (!metrics) {
+    return 0.0;
+  }
+
   const get = (metric) => getMetric(metrics, metric);
 
   // The following defines the index of each metric's values.
@@ -75,14 +79,12 @@ export const getScore = (metrics) => {
     eq6Val
   );
 
-  const eq3 = eq3Val;
-  const eq6 = eq6Val;
   let eq3eq6NextLowerMacro;
   let eq3eq6NextLowerMacroLeft;
   let eq3eq6NextLowerMacroRight;
 
-  // eq3 and eq6 are related
-  if (eq3 === 1 && eq6 === 1) {
+  // eq3Val and eq6Val are related
+  if (eq3Val === 1 && eq6Val === 1) {
     // 11 --> 21
     eq3eq6NextLowerMacro = ''.concat(
       eq1Val,
@@ -92,7 +94,7 @@ export const getScore = (metrics) => {
       eq5Val,
       eq6Val
     );
-  } else if (eq3 === 0 && eq6 === 1) {
+  } else if (eq3Val === 0 && eq6Val === 1) {
     // 01 --> 11
     eq3eq6NextLowerMacro = ''.concat(
       eq1Val,
@@ -102,7 +104,7 @@ export const getScore = (metrics) => {
       eq5Val,
       eq6Val
     );
-  } else if (eq3 === 1 && eq6 === 0) {
+  } else if (eq3Val === 1 && eq6Val === 0) {
     // 10 --> 11
     eq3eq6NextLowerMacro = ''.concat(
       eq1Val,
@@ -112,7 +114,7 @@ export const getScore = (metrics) => {
       eq5Val,
       eq6Val + 1
     );
-  } else if (eq3 === 0 && eq6 === 0) {
+  } else if (eq3Val === 0 && eq6Val === 0) {
     // 00 --> 01
     // 00 --> 10
     eq3eq6NextLowerMacroLeft = ''.concat(
@@ -165,7 +167,7 @@ export const getScore = (metrics) => {
   const scoreEq2NextLowerMacro = lookup[eq2NextLowerMacro];
   let scoreEq3eq6NextLowerMacro;
 
-  if (eq3 === 0 && eq6 === 0) {
+  if (eq3Val === 0 && eq6Val === 0) {
     // multiple path take the one with higher score
     const scoreEq3eq6NextLowerMacroLeft = lookup[eq3eq6NextLowerMacroLeft];
     const scoreEq3eq6NextLowerMacroRight = lookup[eq3eq6NextLowerMacroRight];

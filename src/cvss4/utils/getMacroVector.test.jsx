@@ -87,4 +87,34 @@ describe('getMacroVector', () => {
       })
     ).toEqual('002221');
   });
+
+  it('should handle macro vector. EQ6=0', () => {
+    expect(
+      getMacroVector({
+        ...defaultMetrics,
+        CR: 'H',
+        VC: 'H',
+      })
+    ).toEqual('001200');
+  });
+
+  it('should handle macro vector. EQ3=1 & EQ6=0', () => {
+    expect(
+      getMacroVector({
+        ...defaultMetrics,
+        CR: 'H',
+        VC: 'H',
+      })
+    ).toEqual('001200');
+  });
+
+  it('should handle macro vector. EQ3=0 & EQ6=0', () => {
+    expect(
+      getMacroVector({
+        ...defaultMetrics,
+        VC: 'H',
+        VI: 'H',
+      })
+    ).toEqual('000200');
+  });
 });

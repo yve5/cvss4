@@ -1,5 +1,5 @@
 import { changeValue, resetScore } from './All';
-import { defaultMetrics } from '../../cvss4Score/resources/fakeData';
+import { defaultMetrics } from '../../cvss4/resources/fakeData';
 
 describe('Actions', () => {
   it('should handle CVSS4_CHANGE_VALUE', () => {
