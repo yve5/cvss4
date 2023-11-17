@@ -1,4 +1,4 @@
-import { defaultMetrics } from '../../cvss4/resources/fakeData';
+import { defaultMetrics } from '../resources/fakeData';
 import { getVector } from './getVector';
 
 describe('getVector', () => {
