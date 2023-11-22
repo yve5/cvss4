@@ -6,7 +6,7 @@ export const getMacroVector = (metrics) => {
   // EQ1: 0-AV:N and PR:N and UI:N
   //      1-(AV:N or PR:N or UI:N) and not (AV:N and PR:N and UI:N) and not AV:P
   //      2-AV:P or not(AV:N or PR:N or UI:N)
-  let eq1 = 0;
+  let eq1 = '0';
 
   if (get('AV') === 'N' && get('PR') === 'N' && get('UI') === 'N') {
     eq1 = '0';
@@ -25,7 +25,7 @@ export const getMacroVector = (metrics) => {
 
   // EQ2: 0-(AC:L and AT:N)
   //      1-(not(AC:L and AT:N))
-  let eq2 = 0;
+  let eq2 = '0';
 
   if (get('AC') === 'L' && get('AT') === 'N') {
     eq2 = '0';

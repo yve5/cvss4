@@ -8,11 +8,16 @@ describe('getScore', () => {
   });
 
   it('should handle score. default', () => {
-    expect(getScore({ ...defaultMetrics })).toEqual(0);
+    expect(getScore(defaultMetrics)).toEqual(0);
   });
 
   it('should handle score. no impact on system', () => {
-    expect(getScore({ ...defaultMetrics, VC: 'H' })).toEqual('8.7');
+    expect(
+      getScore({
+        ...defaultMetrics,
+        VC: 'H',
+      })
+    ).toEqual(8.7);
   });
 
   it('should handle score. EQ3=0 & EQ6=0', () => {
@@ -22,7 +27,7 @@ describe('getScore', () => {
         CR: 'H',
         VC: 'H',
       })
-    ).toEqual('8.7');
+    ).toEqual(8.7);
   });
 
   it('should handle score. EQ3=1 & EQ6=0', () => {
@@ -32,7 +37,7 @@ describe('getScore', () => {
         VC: 'H',
         VI: 'H',
       })
-    ).toEqual('9.3');
+    ).toEqual(9.3);
   });
 
   it('should handle score. EQ3=1 & EQ6=1', () => {
@@ -47,7 +52,7 @@ describe('getScore', () => {
         MAV: 'P',
         VI: 'H',
       })
-    ).toEqual('0.1');
+    ).toEqual(0.1);
   });
 
   it('should handle score. EQ3=2 & EQ6=1', () => {
@@ -62,7 +67,7 @@ describe('getScore', () => {
         MAV: 'P',
         SA: 'L',
       })
-    ).toEqual('0.1');
+    ).toEqual(0.1);
   });
 
   it('should handle score. EQ3=2 & EQ6=1', () => {
@@ -77,7 +82,7 @@ describe('getScore', () => {
         MAV: 'P',
         SA: 'L',
       })
-    ).toEqual('0.1');
+    ).toEqual(0.1);
   });
 
   it('should handle score. EQ3=0 & EQ6=1', () => {
@@ -90,7 +95,7 @@ describe('getScore', () => {
         VC: 'H',
         VI: 'H',
       })
-    ).toEqual('8.8');
+    ).toEqual(8.8);
   });
 
   it('should handle score. unreported exploit maturity', () => {
@@ -105,7 +110,7 @@ describe('getScore', () => {
         MAV: 'P',
         SA: 'H',
       })
-    ).toEqual('0.2');
+    ).toEqual(0.2);
   });
 
   xit('should handle score. loop', () => {

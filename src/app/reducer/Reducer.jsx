@@ -1,9 +1,8 @@
 import { CVSS4_CHANGE_VALUE, CVSS4_RESET_SCORE } from '../resources/constants';
-import { cvssConfig } from '../../references/cvssConfig';
-import { initMetrics } from '../utils';
+import { getDefaultMetrics } from '../../cvss4';
 
 const initialState = {
-  metrics: initMetrics(cvssConfig),
+  metrics: getDefaultMetrics(),
 };
 
 const reducer = (state = initialState, action = {}) => {

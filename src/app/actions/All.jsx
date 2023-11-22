@@ -1,6 +1,5 @@
 import { CVSS4_CHANGE_VALUE, CVSS4_RESET_SCORE } from '../resources/constants';
-import { cvssConfig } from '../../references/cvssConfig';
-import { initMetrics } from '../utils';
+import { getDefaultMetrics } from '../../cvss4';
 
 export const changeValue = (metric, value) => ({
   type: CVSS4_CHANGE_VALUE,
@@ -10,5 +9,5 @@ export const changeValue = (metric, value) => ({
 
 export const resetScore = () => ({
   type: CVSS4_RESET_SCORE,
-  metrics: initMetrics(cvssConfig),
+  metrics: getDefaultMetrics(),
 });

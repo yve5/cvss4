@@ -404,5 +404,5 @@ export const getScore = (metrics) => {
     result = 10.0;
   }
 
-  return result.toFixed(1);
+  return Math.round(result * 10) / 10;
 };

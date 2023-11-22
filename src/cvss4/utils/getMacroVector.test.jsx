@@ -117,4 +117,38 @@ describe('getMacroVector', () => {
       })
     ).toEqual('000200');
   });
+
+  it('should handle macro vector. EQ2', () => {
+    expect(
+      getMacroVector({
+        ...defaultMetrics,
+        AC: 'L',
+        AT: 'N',
+      })
+    ).toEqual('002201');
+
+    expect(
+      getMacroVector({
+        ...defaultMetrics,
+        AC: 'L',
+        AT: 'P',
+      })
+    ).toEqual('012201');
+
+    expect(
+      getMacroVector({
+        ...defaultMetrics,
+        AC: 'H',
+        AT: 'N',
+      })
+    ).toEqual('012201');
+
+    expect(
+      getMacroVector({
+        ...defaultMetrics,
+        AC: 'H',
+        AT: 'P',
+      })
+    ).toEqual('012201');
+  });
 });
