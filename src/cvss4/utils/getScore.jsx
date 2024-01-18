@@ -4,6 +4,37 @@ import { getEQMaxes } from './getEQMaxes';
 import { extractValueMetric } from './extractValueMetric';
 import { cvssLookupGlobal as lookup } from '../references/cvssLookup';
 import { maxSeverity } from '../references/maxSeverity';
+import { roundScore } from './roundScore';
+import {
+  CVSS4_AC_LEVELS,
+  CVSS4_AR_LEVELS,
+  CVSS4_AT_LEVELS,
+  CVSS4_AV_LEVELS,
+  CVSS4_CR_LEVELS,
+  CVSS4_IR_LEVELS,
+  CVSS4_PR_LEVELS,
+  CVSS4_SA_LEVELS,
+  CVSS4_SC_LEVELS,
+  CVSS4_SI_LEVELS,
+  CVSS4_UI_LEVELS,
+  CVSS4_VA_LEVELS,
+  CVSS4_VC_LEVELS,
+  CVSS4_VI_LEVELS,
+  CVSS4_AC,
+  CVSS4_AR,
+  CVSS4_AT,
+  CVSS4_AV,
+  CVSS4_CR,
+  CVSS4_IR,
+  CVSS4_PR,
+  CVSS4_SA,
+  CVSS4_SC,
+  CVSS4_SI,
+  CVSS4_UI,
+  CVSS4_VA,
+  CVSS4_VC,
+  CVSS4_VI,
+} from '../resources/constants';
 
 export const getScore = (metrics) => {
   if (!metrics) {
@@ -12,35 +43,13 @@ export const getScore = (metrics) => {
 
   const get = (metric) => getMetric(metrics, metric);
 
-  // The following defines the index of each metric's values.
-  // It is used when looking for the highest vector part of the
-  // combinations produced by the MacroVector respective highest vectors.
-  const AVLevels = { N: 0.0, A: 0.1, L: 0.2, P: 0.3 };
-  const PRLevels = { N: 0.0, L: 0.1, H: 0.2 };
-  const UILevels = { N: 0.0, P: 0.1, A: 0.2 };
-
-  const ACLevels = { L: 0.0, H: 0.1 };
-  const ATLevels = { N: 0.0, P: 0.1 };
-
-  const VCLevels = { H: 0.0, L: 0.1, N: 0.2 };
-  const VILevels = { H: 0.0, L: 0.1, N: 0.2 };
-  const VALevels = { H: 0.0, L: 0.1, N: 0.2 };
-
-  const SCLevels = { H: 0.1, L: 0.2, N: 0.3 };
-  const SILevels = { S: 0.0, H: 0.1, L: 0.2, N: 0.3 };
-  const SALevels = { S: 0.0, H: 0.1, L: 0.2, N: 0.3 };
-
-  const CRLevels = { H: 0.0, M: 0.1, L: 0.2 };
-  const IRLevels = { H: 0.0, M: 0.1, L: 0.2 };
-  const ARLevels = { H: 0.0, M: 0.1, L: 0.2 };
-
-  // const ELevels = { U: 0.2, P: 0.1, A: 0 };
-
   const macroVector = getMacroVector(metrics);
 
   // Exception for no impact on system (shortcut)
   if (
-    ['VC', 'VI', 'VA', 'SC', 'SI', 'SA'].every((metric) => get(metric) === 'N')
+    [CVSS4_VC, CVSS4_VI, CVSS4_VA, CVSS4_SC, CVSS4_SI, CVSS4_SA].every(
+      (metric) => get(metric) === 'N'
+    )
   ) {
     return 0.0;
   }
@@ -235,37 +244,51 @@ export const getScore = (metrics) => {
     const maxVector = maxVectors[i];
 
     severityDistanceAV =
-      AVLevels[get('AV')] - AVLevels[extractValueMetric('AV', maxVector)];
+      CVSS4_AV_LEVELS[get(CVSS4_AV)] -
+      CVSS4_AV_LEVELS[extractValueMetric(CVSS4_AV, maxVector)];
     severityDistancePR =
-      PRLevels[get('PR')] - PRLevels[extractValueMetric('PR', maxVector)];
+      CVSS4_PR_LEVELS[get(CVSS4_PR)] -
+      CVSS4_PR_LEVELS[extractValueMetric(CVSS4_PR, maxVector)];
     severityDistanceUI =
-      UILevels[get('UI')] - UILevels[extractValueMetric('UI', maxVector)];
+      CVSS4_UI_LEVELS[get(CVSS4_UI)] -
+      CVSS4_UI_LEVELS[extractValueMetric(CVSS4_UI, maxVector)];
 
     severityDistanceAC =
-      ACLevels[get('AC')] - ACLevels[extractValueMetric('AC', maxVector)];
+      CVSS4_AC_LEVELS[get(CVSS4_AC)] -
+      CVSS4_AC_LEVELS[extractValueMetric(CVSS4_AC, maxVector)];
     severityDistanceAT =
-      ATLevels[get('AT')] - ATLevels[extractValueMetric('AT', maxVector)];
+      CVSS4_AT_LEVELS[get(CVSS4_AT)] -
+      CVSS4_AT_LEVELS[extractValueMetric(CVSS4_AT, maxVector)];
 
     severityDistanceVC =
-      VCLevels[get('VC')] - VCLevels[extractValueMetric('VC', maxVector)];
+      CVSS4_VC_LEVELS[get(CVSS4_VC)] -
+      CVSS4_VC_LEVELS[extractValueMetric(CVSS4_VC, maxVector)];
     severityDistanceVI =
-      VILevels[get('VI')] - VILevels[extractValueMetric('VI', maxVector)];
+      CVSS4_VI_LEVELS[get(CVSS4_VI)] -
+      CVSS4_VI_LEVELS[extractValueMetric(CVSS4_VI, maxVector)];
     severityDistanceVA =
-      VALevels[get('VA')] - VALevels[extractValueMetric('VA', maxVector)];
+      CVSS4_VA_LEVELS[get(CVSS4_VA)] -
+      CVSS4_VA_LEVELS[extractValueMetric(CVSS4_VA, maxVector)];
 
     severityDistanceSC =
-      SCLevels[get('SC')] - SCLevels[extractValueMetric('SC', maxVector)];
+      CVSS4_SC_LEVELS[get(CVSS4_SC)] -
+      CVSS4_SC_LEVELS[extractValueMetric(CVSS4_SC, maxVector)];
     severityDistanceSI =
-      SILevels[get('SI')] - SILevels[extractValueMetric('SI', maxVector)];
+      CVSS4_SI_LEVELS[get(CVSS4_SI)] -
+      CVSS4_SI_LEVELS[extractValueMetric(CVSS4_SI, maxVector)];
     severityDistanceSA =
-      SALevels[get('SA')] - SALevels[extractValueMetric('SA', maxVector)];
+      CVSS4_SA_LEVELS[get(CVSS4_SA)] -
+      CVSS4_SA_LEVELS[extractValueMetric(CVSS4_SA, maxVector)];
 
     severityDistanceCR =
-      CRLevels[get('CR')] - CRLevels[extractValueMetric('CR', maxVector)];
+      CVSS4_CR_LEVELS[get(CVSS4_CR)] -
+      CVSS4_CR_LEVELS[extractValueMetric(CVSS4_CR, maxVector)];
     severityDistanceIR =
-      IRLevels[get('IR')] - IRLevels[extractValueMetric('IR', maxVector)];
+      CVSS4_IR_LEVELS[get(CVSS4_IR)] -
+      CVSS4_IR_LEVELS[extractValueMetric(CVSS4_IR, maxVector)];
     severityDistanceAR =
-      ARLevels[get('AR')] - ARLevels[extractValueMetric('AR', maxVector)];
+      CVSS4_AR_LEVELS[get(CVSS4_AR)] -
+      CVSS4_AR_LEVELS[extractValueMetric(CVSS4_AR, maxVector)];
 
     // if multiple maxes exist to reach it it is enough the first one
     if (
@@ -295,7 +318,9 @@ export const getScore = (metrics) => {
 
   const currentSeverityDistanceeq1 =
     severityDistanceAV + severityDistancePR + severityDistanceUI;
+
   const currentSeverityDistanceeq2 = severityDistanceAC + severityDistanceAT;
+
   const currentSeverityDistanceeq3eq6 =
     severityDistanceVC +
     severityDistanceVI +
@@ -303,6 +328,7 @@ export const getScore = (metrics) => {
     severityDistanceCR +
     severityDistanceIR +
     severityDistanceAR;
+
   const currentSeverityDistanceeq4 =
     severityDistanceSC + severityDistanceSI + severityDistanceSA;
   // const currentSeverityDistanceeq5 = 0;
@@ -395,14 +421,5 @@ export const getScore = (metrics) => {
   // 3. The score of the vector is the score of the MacroVector
   //    (i.e. the score of the highest severity vector) minus the mean
   //    distance so computed. This score is rounded to one decimal place.
-  let result = value - meanDistance;
-
-  if (result < 0) {
-    result = 0.0;
-  }
-  if (result > 10) {
-    result = 10.0;
-  }
-
-  return Math.round(result * 10) / 10;
+  return roundScore(value - meanDistance);
 };

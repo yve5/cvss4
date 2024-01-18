@@ -1,4 +1,4 @@
 import { maxComposed } from '../references/maxComposed';
 
-export const getEQMaxes = (inLookup, eq) =>
-  maxComposed[`eq${eq}`][inLookup[eq - 1]];
+export const getEQMaxes = (lookup, eq) =>
+  maxComposed[`eq${eq}`][lookup[eq - 1]];
