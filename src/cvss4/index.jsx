@@ -1,5 +1,13 @@
+import { getMetricOptionName } from './utils/getMetricOptionName';
 import { getDefaultMetrics } from './utils/getDefaultMetrics';
-import { getScore } from './utils/getScore';
+import { getMetricName } from './utils/getMetricName';
 import { getVector } from './utils/getVector';
+import { getScore } from './utils/getScore';
 
-export { getDefaultMetrics, getScore, getVector };
+export {
+  getMetricOptionName,
+  getDefaultMetrics,
+  getMetricName,
+  getVector,
+  getScore,
+};
