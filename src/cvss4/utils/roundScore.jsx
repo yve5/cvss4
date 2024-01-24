@@ -10,7 +10,7 @@ export const roundScore = (score) => {
       result = 10.0;
     }
 
-    result = Math.round(result * 10) / 10;
+    result = parseFloat(result.toFixed(1));
   }
 
   return result;

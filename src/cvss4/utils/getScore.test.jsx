@@ -124,4 +124,24 @@ describe('getScore', () => {
       })
     ).toEqual(0.2);
   });
+
+  it('should handle score. use case', () => {
+    expect(
+      getScore({
+        ...defaultMetrics,
+        AV: 'L',
+        AC: 'H',
+        AT: 'N',
+        PR: 'L',
+        UI: 'N',
+        VC: 'L',
+        VI: 'H',
+        VA: 'L',
+        SC: 'N',
+        SI: 'N',
+        SA: 'N',
+        E: 'U',
+      })
+    ).toEqual(1.9);
+  });
 });
