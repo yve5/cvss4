@@ -10,7 +10,8 @@ const Header = ({
   },
   resetScore,
 }) => {
-  const currentScore = getVector(metrics);
+  const currentVector = getVector(metrics);
+  const currentScore = getScore(metrics);
 
   return (
     <header style={{ marginTop: '7rem' }}>
@@ -20,7 +21,7 @@ const Header = ({
             <div className="d-flex justify-content-between align-self-center">
               <span className="display-5">CVSS 4.0</span>
               <span className="display-5 text-end">
-                Score:{getScore(metrics)}
+                Score:{currentScore.toFixed(1)}
               </span>
             </div>
 
@@ -33,7 +34,7 @@ const Header = ({
                   // eslint-disable-next-line
                   window.prompt(
                     'Copy to clipboard: Ctrl+C, Enter',
-                    currentScore
+                    currentVector
                   )
                 }
               >
@@ -42,7 +43,7 @@ const Header = ({
 
               <input
                 className="form-control"
-                value={currentScore}
+                value={currentVector}
                 type="text"
                 readOnly
               />
