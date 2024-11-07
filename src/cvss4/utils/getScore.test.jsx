@@ -1,4 +1,3 @@
-import { expectedMetricOrder } from '../references/metrics';
 import { defaultMetrics } from '../resources/fakeData';
 import { getScore } from './getScore';
 

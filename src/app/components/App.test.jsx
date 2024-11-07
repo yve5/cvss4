@@ -1,57 +1,71 @@
+import React from 'react';
 import configureMockStore from 'redux-mock-store';
-import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { act, create } from 'react-test-renderer';
+
+import { vi } from 'vitest';
+import { createRoot } from 'react-dom/client';
+import { Provider, ReactReduxContext } from 'react-redux';
+import { act, fireEvent, render } from '@testing-library/react';
 
 import App from './App';
 import store from '../resources/store';
 
-test('renders learn react link', () => {
-  render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
-  const linkElement = screen.getByText(/CVSS 4.0/i);
-  expect(linkElement).toBeInTheDocument();
-});
+const mockStore = configureMockStore();
+const defaultStore = { cvss4: {} };
 
-test('should match expected snapshot', () => {
-  const mockStore = configureMockStore();
+describe('App', () => {
+  it('should render without crashing', async () => {
+    const root = createRoot(document.createElement('div'));
 
-  window.prompt = jest.fn();
+    await act(async () => {
+      root.render(
+        <Provider store={store}>
+          <App context={ReactReduxContext} />
+        </Provider>
+      );
+    });
 
-  const component = create(
-    <Provider store={mockStore({ cvss4: {} })}>
-      <App history={history} />
-    </Provider>
-  );
+    await act(async () => {
+      root.unmount();
+    });
+  });
 
-  act(() => {
-    component.update(
-      <Provider store={mockStore({ cvss4: {} })}>
+  it('should match expected snapshot', async () => {
+    Object.assign(navigator, {
+      clipboard: {
+        writeText: vi.fn().mockResolvedValue(),
+      },
+    });
+
+    const { asFragment, getByText, rerender } = render(
+      <Provider store={mockStore(defaultStore)}>
         <App history={history} />
       </Provider>
     );
-  });
 
-  act(() => {
-    component.root
-      .findAllByProps({ 'data-testid': 'button-metric-change-value' })[7]
-      .props.onClick();
-  });
+    rerender(
+      <Provider store={mockStore(defaultStore)}>
+        <App history={history} />
+      </Provider>
+    );
 
-  act(() => {
-    component.root
-      .findByProps({ 'data-testid': 'button-copy-vector' })
-      .props.onClick();
-  });
+    await act(async () => {
+      fireEvent.click(getByText('Irrecoverable (I)'));
+    });
 
-  act(() => {
-    component.root
-      .findByProps({ 'data-testid': 'button-reset-score' })
-      .props.onClick();
-  });
+    await act(async () => {
+      fireEvent.click(getByText('Copy'));
+    });
 
-  expect(component.toJSON()).toMatchSnapshot();
+    await act(async () => {
+      await new Promise((resolve) => {
+        setTimeout(resolve, 3000);
+      });
+    });
+
+    await act(async () => {
+      fireEvent.click(getByText('Reset'));
+    });
+
+    expect(asFragment()).toMatchSnapshot();
+  });
 });

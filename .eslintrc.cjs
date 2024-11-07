@@ -1,9 +1,10 @@
 module.exports = {
-  extends: 'airbnb',
-  env: {
-    browser: true,
-    jest: true,
-  },
+  root: true,
+  env: { browser: true, es2020: true, jest: true },
+  extends: ['airbnb'],
+  ignorePatterns: ['dist', 'build', 'lib', '.eslintrc.cjs'],
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  settings: { react: { version: '18.2' } },
   rules: {
     'global-require': 'off',
     'import/prefer-default-export': 'off',

@@ -1,19 +1,11 @@
-# CVSS v4 Calculator
+# CVSS 4.0 Calculator
 
-## Pitch
+This project is a frontend application for calculating Common Vulnerability Scoring System (CVSS) scores, based on the CVSS 4.0 standard. The CVSS calculator helps users assess the severity of cybersecurity vulnerabilities by assigning scores based on a variety of predefined criteria.
 
-This project proposes a CVSS v4.0 calculator with [Create React App](https://github.com/facebook/create-react-app).
+## Features
 
-## Scripts
-
-| Script             | Desription                                                                    |
-| :----------------- | :---------------------------------------------------------------------------- |
-| `npm start`        | Runs the app in the development mode.                                         |
-| `npm test`         | Launches the test runner in the interactive watch mode.                       |
-| `npm run coverage` | Launches the test runner in order to generate a project full coverage report. |
-| `npm run build`    | Builds the app for production to the `build` folder.                          |
-| `npm run deploy`   | Deploy the `build` folder content in Github project page.                     |
-
-## Source
-
-[Original CVSS v4.0 calculator](https://github.com/RedHatProductSecurity/cvss-v4-calculator/tree/main).
+- **Real-time Updates**: Score updates as metrics are adjusted.
+- **Detailed Breakdown**: View a breakdown of the score based on the metrics chosen.
+- **Score Calculation**: Calculate CVSS scores based on the latest CVSS 4.0 standard.
+- **User-Friendly Interface**: Simple and intuitive design for an easy scoring experience.
+- **Customizable Metrics**: Select and adjust various metrics to match the specific vulnerability characteristics.

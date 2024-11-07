@@ -1,6 +1,6 @@
 import reducer from './Reducer';
-import { defaultMetrics } from '../../cvss4/resources/fakeData';
 import { changeValue, resetScore } from '../actions/All';
+import { defaultMetrics } from '../../cvss4/resources/fakeData';
 
 const initialState = {
   metrics: defaultMetrics,
