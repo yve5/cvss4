@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { clsx } from 'clsx';
+import { connect } from 'react-redux';
+import { getScore, getVector } from 'organe';
 
 import * as All from '../actions/All';
-import { getScore, getVector } from '../../cvss4';
 
 const Header = ({
   root: {

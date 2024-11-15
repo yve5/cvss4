@@ -3,7 +3,7 @@ import { clsx } from 'clsx';
 
 import Card from './Card';
 import Header from './Header';
-import { cvssConfig } from '../../cvss4/references/cvssConfig';
+import { cvssConfig } from '../resources/cvssConfig';
 
 const App = () => (
   <>
