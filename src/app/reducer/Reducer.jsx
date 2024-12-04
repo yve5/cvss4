@@ -1,4 +1,4 @@
-import { getDefaultMetrics } from 'organe';
+import { getDefaultMetrics } from 'lapwing';
 import { CVSS4_CHANGE_VALUE, CVSS4_RESET_SCORE } from '../resources/constants';
 
 const initialState = {

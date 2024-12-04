@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { clsx } from 'clsx';
 import { connect } from 'react-redux';
-import { getScore, getVector } from 'organe';
+import { getScore, getVector } from 'lapwing';
 
 import * as All from '../actions/All';
 
