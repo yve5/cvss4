@@ -1,0 +1,29 @@
+import { mergeConfig, defineConfig, configDefaults } from 'vitest/config';
+import { fileURLToPath } from 'node:url';
+import viteConfig from './vite.config';
+
+export default mergeConfig(
+  viteConfig,
+  defineConfig({
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: 'src/setupTests.js',
+      coverage: {
+        ...configDefaults.coverage,
+        exclude: [...configDefaults.coverage.exclude, 'src/main.jsx'],
+      },
+    },
+  })
+);
+
+// test: {
+//   environment: 'jsdom',
+//   exclude: [...configDefaults.exclude, 'e2e/**'],
+//   root: fileURLToPath(new URL('./', import.meta.url)),
+//   coverage: {
+//     ...configDefaults.coverage,
+//     //   provider: 'istanbul', // or 'v8'
+//     exclude: [...(configDefaults.coverage.exclude ?? []), 'src/main.ts'],
+//   },
+// },

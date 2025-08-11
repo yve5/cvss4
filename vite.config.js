@@ -8,13 +8,4 @@ import { configDefaults } from 'vitest/config';
 export default defineConfig({
   plugins: [react(), eslint()],
   base: '/cvss4',
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: 'src/setupTests.js',
-    coverage: {
-      ...configDefaults.coverage,
-      exclude: [...configDefaults.coverage.exclude, 'src/main.jsx'],
-    },
-  },
 });

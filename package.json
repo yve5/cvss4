@@ -32,7 +32,7 @@
     "eslint": "8.57.0",
     "eslint-config-airbnb": "19.0.4",
     "gh-pages": "6.3.0",
-    "jsdom": "25.0.1",
+    "jsdom": "26.1.0",
     "redux-mock-store": "1.5.5"
   }
 }
